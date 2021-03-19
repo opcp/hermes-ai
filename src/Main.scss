@@ -1,0 +1,23 @@
+@import "./sass/variable";
+@import "./sass/function";
+@import "./sass/home";
+@import "./sass/navbar";
+@import "./sass/header";
+@import "./sass/page/TrainModel";
+@import "./sass/card";
+@import "./sass/contract";
+@import "./sass/.webMap";
+
+body {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+.main_container {
+  width: $main_container_width;
+   @include flex_func(center,center,column);
+  .main_body {
+    width: $body_container_width;
+  }
+}

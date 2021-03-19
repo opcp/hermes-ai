@@ -1,0 +1,32 @@
+.WebMap_section {
+  @extend .main_container;
+  .WebMap_body {
+    @extend .main_body;
+    ul {
+      @include flex_func(center, flex-start);
+      width: 100%;
+      margin: 5vw 0;
+      li {
+        img {
+          width: 20%;
+        }
+        h3 {
+          margin: 0;
+        }
+        a {
+          margin: 2vh 0;
+          color: #ccc;
+          text-decoration: none;
+        }
+        @include flex_func(center, flex-start, column);
+        width: calc(100% / 6);
+        list-style: none;
+      }
+    }
+  }
+}
+
+footer {
+  text-align: center;
+  border-top: 1px solid pink;
+}

@@ -1,0 +1,15 @@
+.form_container {
+  background: #ace;
+  @extend .main_container;
+  .form_body {
+    @extend .main_body;
+    display: flex;
+    .form_text {
+      width: 50%;
+    }
+    .form_wrap {
+      padding: 20px;
+      width: 50%;
+    }
+  }
+}

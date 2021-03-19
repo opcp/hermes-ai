@@ -1,0 +1,27 @@
+.header_section {
+  background-image: url(https://www.clarifai.com/hubfs/conference/perceive-conference-hero-blue.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+  height: 50vh;
+  padding-top:10vh;
+  @include flex_func(center, normal);
+  .header_wrap {
+    width: $body_container_width;
+  }
+
+  #container {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+
+    span {
+      margin: 0 20px 0 0;
+      word-break: break-all;
+    }
+
+    i {
+      font-style: normal;
+    }
+  }
+}
