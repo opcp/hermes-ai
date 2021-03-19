@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Header from "../components/Header/Header";
 import Contract from "../components/Contract/Contract";
 import Card from "../components/Card/Card";
-import WenMap from "../components/WebMap/WebMap";
+import Login from "../page/Login";
 
 function TrainModel() {
   return (
@@ -41,7 +41,7 @@ function TrainModel() {
         </div>
       </section>
       <Contract />
-      <WenMap />
+      <Login />
     </>
   );
 }

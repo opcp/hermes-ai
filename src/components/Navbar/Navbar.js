@@ -4,37 +4,10 @@ import Test from "../../page/Test";
 import { Button, Modal } from "react-bootstrap";
 import { useState } from "react";
 
-function MemberModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
-
 function Navbar() {
-  const [modalShow, setModalShow] = useState(false);
-  const [loginStatus, setStatus] = useState(false);
+  const [RegisteredModalShow, setRegisteredModalShow] = useState(false);
+  const [LoginModalShow, setLoginModalShow] = useState(false);
+  const [loginStatus, setStatus] = useState(true);
 
   return (
     <>
@@ -59,17 +32,11 @@ function Navbar() {
             </ul>
           </div>
           <div className="nav_login">
-            <Button
-              variant="outline-primary"
-              onClick={() => setModalShow(true)}
-            >
-              會員註冊/登入
-            </Button>
-            <Button variant="outline-primary" onClick={() => setStatus(true)}>
-              test
-            </Button>
+            <Button variant="outline-info">註冊</Button>
+            <Button variant="outline-primary">登入</Button>
 
-            <MemberModal show={modalShow} onHide={() => setModalShow(false)} />
+            {/* <RegisteredModal show={RegisteredModalShow} onHide={() => setRegisteredModalShow(false)} />
+            <LoginModal show={LoginModalShow} onHide={() => setLoginModalShow(false)}  /> */}
           </div>
         </nav>
       </section>

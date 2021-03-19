@@ -1,0 +1,7 @@
+.loginContainer {
+    @extend .main_container;
+    .loginWrap {
+        @extend .main_body;
+        
+    }
+}

@@ -4,6 +4,7 @@
 @import "./sass/navbar";
 @import "./sass/header";
 @import "./sass/page/TrainModel";
+@import "./sass/page/Login";
 @import "./sass/card";
 @import "./sass/contract";
 @import "./sass/.webMap";
@@ -12,6 +13,7 @@ body {
   margin: 0;
   padding: 0;
   position: absolute;
+  outline: 0;
 }
 
 .main_container {
