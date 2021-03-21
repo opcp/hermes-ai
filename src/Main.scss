@@ -1,7 +1,7 @@
 @import "./sass/variable";
 @import "./sass/function";
 @import "./sass/home";
-@import "./sass/navbar";
+@import "./sass/menu";
 @import "./sass/header";
 @import "./sass/page/TrainModel";
 @import "./sass/page/Login";
@@ -11,14 +11,14 @@
 
 body {
   margin: 0;
-  padding: 0;
+  padding: $menu_padding 0 0 0;
   position: absolute;
   outline: 0;
 }
 
 .main_container {
   width: $main_container_width;
-   @include flex_func(center,center,column);
+  @include flex_func(center, center, column);
   .main_body {
     width: $body_container_width;
   }

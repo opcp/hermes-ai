@@ -1,7 +1,21 @@
 .loginContainer {
-    @extend .main_container;
-    .loginWrap {
-        @extend .main_body;
-        
+  @extend .main_container;
+  .loginWrap {
+    @extend .main_body;
+    @include flex_func(flex-end);
+    .loginInput {
+      width: 40%;
+      margin-top: 3%;
+      padding: 2%;
+      border: 1px solid #ccc;
+      border-radius: 2%;
+      h3{
+          text-align: center;
+          color: rgb(65, 115, 165);
+      }
+      .login_btn {
+        @include flex_func(flex-end);
+      }
     }
+  }
 }
