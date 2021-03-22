@@ -3,19 +3,20 @@
 @import "./sass/home";
 @import "./sass/menu";
 @import "./sass/header";
-@import "./sass/page/TrainModel";
-@import "./sass/page/Login";
+@import "./sass/page/example";
+@import "./sass/page/login";
+@import "./sass/page/signup";
 @import "./sass/card";
 @import "./sass/contract";
 @import "./sass/.webMap";
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
 
 body {
   margin: 0;
   padding: $menu_padding 0 0 0;
   position: absolute;
-  outline: 0;
+  font-family: 'Noto Sans TC', sans-serif;
 }
-
 .main_container {
   width: $main_container_width;
   @include flex_func(center, center, column);

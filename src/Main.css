@@ -1,0 +1,507 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
+.home_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.home_container .home_wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav_section {
+  background: #fff;
+  height: 10vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav_section .nav_wrap {
+  width: 1200px;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav_section .nav_wrap div {
+  height: 100%;
+}
+
+.nav_section .nav_wrap #nav_logo {
+  width: 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav_section .nav_wrap .nav_list {
+  width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav_section .nav_wrap .nav_list ul {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav_section .nav_wrap .nav_list ul a {
+  color: black;
+  text-decoration: none;
+  width: 100%;
+}
+
+.nav_section .nav_wrap .nav_list ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  color: black;
+  width: 100%;
+  list-style: none;
+  -webkit-transition: .3s;
+  transition: .3s;
+  font-size: 25px;
+}
+
+.nav_section .nav_wrap .nav_list ul li:hover {
+  background-color: #ebebeb;
+}
+
+.nav_section .nav_wrap .nav_login {
+  width: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.nav_section .nav_wrap .nav_login button {
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.header_section {
+  background-image: url(https://www.clarifai.com/hubfs/conference/perceive-conference-hero-blue.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+  height: 80vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.header_section .header_wrap {
+  width: 1200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.header_section #container {
+  font-size: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+.header_section #container span {
+  margin: 0 20px 0 0;
+  word-break: break-all;
+}
+
+.header_section #container i {
+  font-style: normal;
+}
+
+.header_section #container button {
+  width: 100px;
+  margin: 8% 5% 0 0;
+  font-size: 20px;
+}
+
+.loginContainer {
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+  height: 70vh;
+}
+
+.loginContainer .loginWrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.loginContainer .loginWrap .loginInput {
+  background-color: white;
+  width: 40%;
+  height: 50vh;
+  margin-top: 3%;
+  padding: 2%;
+  border: 1px solid #ccc;
+  border-radius: 2%;
+}
+
+.loginContainer .loginWrap .loginInput h3 {
+  text-align: center;
+  color: #4173a5;
+}
+
+.loginContainer .loginWrap .loginInput .login_btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.signup_container {
+  background-color: yellow;
+}
+
+.card_wrap {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  top: -100px;
+}
+
+.card_wrap .card {
+  width: 25%;
+  height: 350px;
+  margin: 4%;
+  -webkit-box-shadow: 0 5px 10px 0 #ccc;
+          box-shadow: 0 5px 10px 0 #ccc;
+  background-color: transparent;
+}
+
+.card_wrap .card .card_image {
+  width: 100%;
+  height: 50%;
+  border-radius: 3%;
+}
+
+.card_wrap .card .card_text {
+  padding: 10px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.card_wrap .card .card_text span {
+  color: #7a7a7a;
+}
+
+.card_wrap .card .card_link {
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.card_wrap .card .card_link a {
+  text-decoration: none;
+}
+
+.form_container {
+  background: #4090e0;
+  height: calc(90vh);
+}
+
+.form_container .form_body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 2% 0;
+}
+
+.form_container .form_body .form_text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
+  margin-right: 10%;
+  color: white;
+}
+
+.form_container .form_body .form_text p {
+  margin: 5% 0;
+}
+
+.form_container .form_body .form_wrap {
+  width: 40%;
+  height: 100%;
+}
+
+.form_container .form_body .form_wrap form {
+  padding: 5%;
+  background-color: white;
+  border-radius: 2%;
+  border: 1px solid transparent;
+}
+
+.form_container .form_body .form_wrap .custom-checkbox {
+  margin: 0;
+  width: 50%;
+}
+
+.form_container .form_body .form_wrap button {
+  width: 100%;
+}
+
+.WebMap_section .WebMap_body ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  margin: 5vw 0;
+}
+
+.WebMap_section .WebMap_body ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: calc(100% / 6);
+  list-style: none;
+}
+
+.WebMap_section .WebMap_body ul li img {
+  width: 20%;
+}
+
+.WebMap_section .WebMap_body ul li h3 {
+  margin: 0;
+}
+
+.WebMap_section .WebMap_body ul li a {
+  margin: 2vh 0;
+  color: #ccc;
+  text-decoration: none;
+}
+
+footer {
+  text-align: center;
+  border-top: 1px solid pink;
+}
+
+body {
+  margin: 0;
+  padding: 10vh 0 0 0;
+  position: absolute;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.main_container, .home_container, .loginContainer, .signup_container, .form_container, .WebMap_section {
+  width: 1920px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.main_container .main_body, .home_container .main_body, .loginContainer .main_body, .signup_container .main_body, .form_container .main_body, .WebMap_section .main_body, .home_container .home_wrap, .loginContainer .loginWrap, .signup_container .signup_body, .form_container .form_body, .WebMap_section .WebMap_body {
+  width: 1200px;
+}
+/*# sourceMappingURL=Main.css.map */

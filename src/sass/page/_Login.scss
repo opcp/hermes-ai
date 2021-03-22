@@ -1,21 +1,27 @@
 .loginContainer {
-  @extend .main_container;
-  .loginWrap {
-    @extend .main_body;
-    @include flex_func(flex-end);
-    .loginInput {
-      width: 40%;
-      margin-top: 3%;
-      padding: 2%;
-      border: 1px solid #ccc;
-      border-radius: 2%;
-      h3{
-          text-align: center;
-          color: rgb(65, 115, 165);
-      }
-      .login_btn {
+    @extend .main_container;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    height: 70vh;
+    .loginWrap {
+        @extend .main_body;
         @include flex_func(flex-end);
-      }
+        .loginInput {
+            background-color: white;
+            width: 40%;
+            height: 50vh;
+            margin-top: 3%;
+            padding: 2%;
+            border: 1px solid #ccc;
+            border-radius: 2%;
+            h3 {
+                text-align: center;
+                color: rgb(65, 115, 165);
+            }
+            .login_btn {
+                @include flex_func(flex-end);
+            }
+        }
     }
-  }
 }

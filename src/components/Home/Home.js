@@ -1,9 +1,10 @@
-import TrainModel from "../../page/TrainModel";
+import Header from "../Header/Header";
 
 function Home() {
   return (
     <>
-      <TrainModel />
+      <Header />
+      <section className="home_container"></section>
     </>
   );
 }

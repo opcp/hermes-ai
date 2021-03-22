@@ -1,0 +1,8 @@
+.home_container {
+    @extend .main_container;
+    @include flex_func();
+    .home_wrap {
+        @extend .main_body;
+        @include flex_func();
+    }
+}

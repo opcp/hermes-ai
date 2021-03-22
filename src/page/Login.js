@@ -1,10 +1,11 @@
 import { Form, Button } from "react-bootstrap";
+import loginImage from "../components/img/hermesAI.jpg"
 
 function Login() {
   return (
     <>
-      <section className="loginContainer">
-        <div className="loginWrap">
+      <section className="loginContainer" style={{backgroundImage:`url(${loginImage})`}}>
+        <div className="loginWrap" >
           <div className="loginInput">
             <h3>Hermes AI Login</h3>
             <Form>

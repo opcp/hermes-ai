@@ -1,13 +1,14 @@
 import Header from "../components/Header/Header";
 import Contract from "../components/Contract/Contract";
 import Card from "../components/Card/Card";
-import Login from "../page/Login";
+import Footer from '../components/Footer/Footer'
+import Login from "./Login";
 
-function TrainModel() {
+function Example() {
   return (
     <>
       <Header />
-      <section className="main_container">
+       <section className="main_container">
         <div className="main_body">
           <div className="card_wrap">
             <Card
@@ -19,7 +20,7 @@ function TrainModel() {
             />
             <Card
               title={"title2"}
-              url={"https://picsum.photos/seed/picsum/300/200"}
+              url={"https://picsum.photos/id/187/200/300"}
               content={
                 "Create your own models using your own images or text with your own concepts."
               }
@@ -83,8 +84,9 @@ function TrainModel() {
         </div>
       </section>
       <Contract />
+      <Footer />
     </>
   );
 }
 
-export default TrainModel;
+export default Example;

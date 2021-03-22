@@ -1,21 +1,36 @@
 .form_container {
-  background: rgb(47, 109, 170);
+  background: rgb(64, 144, 224);
+  height: calc(90vh);
   @extend .main_container;
   .form_body {
     @extend .main_body;
     display: flex;
-    padding: 20px;
+    padding: 2% 0;
     .form_text {
+      @include flex_func(flex-start, flex-start, column);
       width: 50%;
+      margin-right: 10%;
+      color: white;
+      p{
+        margin: 5% 0;
+      }
     }
     .form_wrap {
       width: 40%;
       height: 100%;
       form {
-        padding: 20px;
+        padding: 5%;
         background-color: white;
         border-radius: 2%;
         border: 1px solid transparent;
+      }
+      // input[type="checkbox"]{
+      //   background: yellow;
+      //   width: 50%;
+      // }
+      .custom-checkbox{
+        margin: 0;
+        width: 50%;
       }
       button {
         width: 100%;

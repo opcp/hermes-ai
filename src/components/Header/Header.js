@@ -1,10 +1,16 @@
+import { Button } from "react-bootstrap";
+import hermes from "../img/hermes3.jpg";
+
 function Header() {
   return (
     <>
-      <section className="header_section">
+      <section
+        style={{ backgroundImage: `url(${hermes})` }}
+        className="header_section"
+      >
         <div className="header_wrap">
           <div id="container">
-            <h1>
+            {/* <h1>
               <span>
                 <i>The</i>
               </span>
@@ -32,12 +38,16 @@ function Header() {
               <span>
                 <i>Sketch</i>
               </span>
-            </h1>
+            </h1> */}
+            <h1>Get started with advanced pre-trained models</h1>
+            <br />
             <p>
               Create, prototype, collaborate, and bring your ideas to life with
               the design platform used by over one million people — from
               freelancers, to the world’s largest teams.
             </p>
+            <Button variant="outline-primary">試用</Button>
+            <Button variant="outline-info">註冊</Button>
           </div>
         </div>
       </section>

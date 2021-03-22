@@ -1,0 +1,7 @@
+.signup_container {
+    @extend .main_container;
+    background-color: yellow;
+    .signup_body {
+        @extend .main_body;
+    }
+}
