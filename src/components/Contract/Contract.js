@@ -4,7 +4,7 @@ import { Col } from "react-bootstrap";
 function Contract() {
   return (
     <>
-      <section className="form_container">
+      <section id="#demo" className="form_container">
         <div className="form_body">
           <div className="form_text">
             <h2>準備好開始了嗎</h2>
@@ -34,15 +34,11 @@ function Contract() {
               </Form.Group>
 
               <Form.Group controlId="formGridAddress2">
-                <Form.Label>連絡電話*</Form.Label>
-                <Form.Control placeholder="連絡電話" />
+                <Form.Label>聯絡電話*</Form.Label>
+                <Form.Control placeholder="聯絡電話" />
               </Form.Group>
 
-              <Form.Group controlId="formGridAddress2">
-                <Form.Label>你需要的解決方案*</Form.Label>
-                <Form.Control placeholder="連絡電話" />
-              </Form.Group>
-
+              <Form.Label>你需要的解決方案*</Form.Label>
               <Form.Group>
                 <Form.Check
                   custom

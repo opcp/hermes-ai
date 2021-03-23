@@ -1,8 +1,8 @@
 .header_section {
   background-image: url(https://www.clarifai.com/hubfs/conference/perceive-conference-hero-blue.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: left;
+  // background-size: cover;
+  // background-position: left;
   height: 80vh;
   width: 100%;
   @include flex_func(center);

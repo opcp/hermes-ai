@@ -1,7 +1,20 @@
-.signup_container {
+.signUpContainer {
     @extend .main_container;
-    background-color: yellow;
-    .signup_body {
-        @extend .main_body;
+    background-color: rgb(64, 144, 224);
+    padding: 2% 0;
+    .signUpWrap {
+        padding: 2%;
+        width: 30vw;
+        border: 1px solid transparent;
+        border-radius: 2%;
+        background-color: white;
+        .signUpLogo {
+            @include flex_func(center);
+        }
+        .signUpBtn {
+            button {
+                float: right;
+            }
+        }
     }
 }

@@ -15,7 +15,12 @@ body {
   margin: 0;
   padding: $menu_padding 0 0 0;
   position: absolute;
-  font-family: 'Noto Sans TC', sans-serif;
+  font-family: "Noto Sans TC", sans-serif;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
 }
 .main_container {
   width: $main_container_width;

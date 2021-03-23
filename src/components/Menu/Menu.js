@@ -4,6 +4,9 @@ import { useState } from "react";
 import Home from "../Home/Home";
 import SignUp from "../../page/SignUp";
 import Login from "../../page/Login";
+import Poc from "../../page/Poc";
+import Purchase from "../../page/Purchase";
+import System from "../../page/System";
 import Contract from "../Contract/Contract";
 import Example from "../../page/Example";
 import Logo from "../img/AI-logo.png";
@@ -35,9 +38,23 @@ function Menu() {
                 <Link to="/demo">
                   <li>試用</li>
                 </Link>
-                <li>POC</li>
-                {loginStatus ? <li>購買點數</li> : ""}
-                {loginStatus ? <li>使用系統</li> : ""}
+                <Link to="/POC">
+                  <li>POC</li>
+                </Link>
+                {loginStatus ? (
+                  <Link to="/Purchase">
+                    <li>購買點數</li>
+                  </Link>
+                ) : (
+                  ""
+                )}
+                {loginStatus ? (
+                  <Link to="/System">
+                    <li>使用系統</li>
+                  </Link>
+                ) : (
+                  ""
+                )}
                 {/* <li>5</li> */}
               </ul>
             </div>
@@ -58,6 +75,9 @@ function Menu() {
           <Route exact path="/" component={Home}></Route>
           <Route path="/example" component={Example}></Route>
           <Route path="/demo" component={Contract}></Route>
+          <Route path="/POC" component={Poc}></Route>
+          <Route path="/Purchase" component={Purchase}></Route>
+          <Route path="/System" component={System}></Route>
           <Route path="/signup" component={SignUp}></Route>
           <Route path="/login" component={Login}></Route>
         </Switch>

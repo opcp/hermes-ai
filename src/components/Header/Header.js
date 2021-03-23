@@ -1,4 +1,5 @@
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import hermes from "../img/hermes3.jpg";
 
 function Header() {
@@ -46,8 +47,12 @@ function Header() {
               the design platform used by over one million people — from
               freelancers, to the world’s largest teams.
             </p>
-            <Button variant="outline-primary">試用</Button>
-            <Button variant="outline-info">註冊</Button>
+            <Link to="/demo">
+              <Button variant="outline-primary">試用</Button>
+            </Link>
+            <Link to="/signup">
+              <Button variant="outline-info">註冊</Button>
+            </Link>
           </div>
         </div>
       </section>
