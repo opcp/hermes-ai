@@ -1,4 +1,4 @@
-.nav_section {
+.menuContainer {
   background: #fff;
   height: 10vh;
   position: fixed;
@@ -7,18 +7,24 @@
   left: 0;
   z-index: 20;
   @include flex_func();
-  .nav_wrap {
-    width: $body_container_width;
+  .menuWrap {
+    width: $bodyContainerWidth;
     height: 100%;
-    div{
+    // #memberDropdown &::after{
+    //   display: none !important;
+    // }
+    div {
       height: 100%;
     }
     @include flex_func();
-    #nav_logo {
-      width: 10%;
+    #menuLogo {
+      width: 15%;
       @include flex_func();
+      img {
+        width: 100%;
+      }
     }
-    .nav_list {
+    .menuList {
       width: 70%;
       @include flex_func();
       ul {
@@ -26,7 +32,7 @@
         width: 100%;
         height: 100%;
         @include flex_func();
-        a{
+        a {
           color: black;
           text-decoration: none;
           width: 100%;
@@ -36,18 +42,18 @@
           color: rgb(0, 0, 0);
           width: 100%;
           list-style: none;
-          transition: .3s;
+          transition: 0.3s;
           font-size: 25px;
-          &:hover{
+          &:hover {
             background-color: rgb(235, 235, 235);
           }
         }
       }
     }
-    .nav_login {
-      width: 20%;
+    .menuLogin {
+      width: 15%;
       @include flex_func();
-      button{
+      button {
         font-size: 20px;
         margin: 0 5px;
       }

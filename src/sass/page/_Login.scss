@@ -1,11 +1,11 @@
 .loginContainer {
-    @extend .main_container;
+    @extend .mainContainer;
     background-repeat: no-repeat;
     background-position: left;
     background-size: cover;
     height: 70vh;
     .loginWrap {
-        @extend .main_body;
+        @extend .mainBody;
         @include flex_func(flex-end);
         .loginInput {
             background-color: white;

@@ -1,7 +1,7 @@
 .WebMap_section {
-  @extend .main_container;
+  @extend .mainContainer;
   .WebMap_body {
-    @extend .main_body;
+    @extend .mainBody;
     ul {
       @include flex_func(center, flex-start);
       width: 100%;

@@ -8,9 +8,9 @@ function Example() {
   return (
     <>
       <Header />
-       <section className="main_container">
-        <div className="main_body">
-          <div className="card_wrap">
+       <section className="mainContainer">
+        <div className="mainBody">
+          <div className="cardWrap">
             <Card
               title={"title"}
               url={"https://picsum.photos/seed/picsum/300/200"}

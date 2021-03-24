@@ -4,7 +4,7 @@ function Home() {
   return (
     <>
       <Header />
-      <section className="home_container"></section>
+      <section className="homeContainer"></section>
     </>
   );
 }

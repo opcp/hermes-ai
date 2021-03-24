@@ -4,9 +4,9 @@ import { Col } from "react-bootstrap";
 function Contract() {
   return (
     <>
-      <section id="#demo" className="form_container">
-        <div className="form_body">
-          <div className="form_text">
+      <section id="#demo" className="formContainer">
+        <div className="formBody">
+          <div className="formText">
             <h2>準備好開始了嗎</h2>
             <p>
               Whether you're a start-up or a Fortune 500, we'd like to discuss a
@@ -16,7 +16,7 @@ function Contract() {
             <p>second</p>
             <p>third</p>
           </div>
-          <div className="form_wrap">
+          <div className="formWrap">
             <Form>
               <Form.Group controlId="formGridAddress1">
                 <Form.Label>姓名*</Form.Label>

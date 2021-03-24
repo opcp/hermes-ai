@@ -13,7 +13,7 @@
 
 body {
   margin: 0;
-  padding: $menu_padding 0 0 0;
+  padding: $menuPadding 0 0 0;
   position: absolute;
   font-family: "Noto Sans TC", sans-serif;
   -ms-overflow-style: none; /* IE and Edge */
@@ -22,10 +22,10 @@ body {
 body::-webkit-scrollbar {
   display: none; /* Hide scrollbar for Chrome, Safari and Opera */
 }
-.main_container {
-  width: $main_container_width;
+.mainContainer {
+  width: $mainContainerWidth;
   @include flex_func(center, center, column);
-  .main_body {
-    width: $body_container_width;
+  .mainBody {
+    width: $bodyContainerWidth;
   }
 }

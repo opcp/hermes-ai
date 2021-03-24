@@ -1,6 +1,6 @@
 import { Form, Button } from "react-bootstrap";
 import loginImage from "../components/img/hermesAI.jpg";
-import logo from "../components/img/AI-logo.png";
+import logo from "../components/img/AI-logo-column.png";
 
 function Login() {
   return (

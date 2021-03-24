@@ -48,7 +48,7 @@ function Card(prop) {
   //   threshold: [0],
   // });
 
-  // let image = document.querySelectorAll(".card_image");
+  // let image = document.querySelectorAll(".cardImage");
 
   // image.forEach((i) => {
   //   console.log(i);
@@ -61,13 +61,13 @@ function Card(prop) {
         <div
           ref={containerRef}
           style={{ backgroundImage: isVisible ? `url(${prop.url})` : "" }}
-          className="card_image"
+          className="cardImage"
         ></div>
-        <div className="card_text">
+        <div className="cardText">
           <h3>{prop.title}</h3>
           <span>{prop.content}</span>
         </div>
-        <div className="card_link">
+        <div className="cardLink">
           <a href="https://docs.clarifai.com/how-to/portal/pcustom-model-walkthrough">
             Try it out
           </a>

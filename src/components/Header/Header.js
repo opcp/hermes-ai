@@ -7,9 +7,9 @@ function Header() {
     <>
       <section
         style={{ backgroundImage: `url(${hermes})` }}
-        className="header_section"
+        className="headerContainer"
       >
-        <div className="header_wrap">
+        <div className="headerWrap">
           <div id="container">
             {/* <h1>
               <span>

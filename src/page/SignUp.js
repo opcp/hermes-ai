@@ -1,6 +1,6 @@
 import { Form, Button, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import logo from "../components/img/AI-logo.png";
+import logo from "../components/img/AI-logo-column.png";
 
 function Signup() {
   return (
