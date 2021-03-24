@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Dropdown } from "react-bootstrap";
 import { useState } from "react";
 import Home from "../Home/Home";
 import SignUp from "../../page/SignUp";
@@ -10,6 +10,8 @@ import System from "../../page/System";
 import Contract from "../Contract/Contract";
 import Example from "../../page/Example";
 import Logo from "../img/AI-logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Menu() {
   const [RegisteredModalShow, setRegisteredModalShow] = useState(false);
@@ -60,12 +62,37 @@ function Menu() {
               </ul>
             </div>
             <div className="menuLogin">
-              <Link to="/signup">
+              {loginStatus ? (
+                // <FontAwesomeIcon icon={faUserCircle} className="userLogo" />
+                <Dropdown >
+                  <Dropdown.Toggle as={"div"} className="userLogo">
+                    <FontAwesomeIcon icon={faUserCircle} />
+                  </Dropdown.Toggle>
+                  {/* <FontAwesomeIcon icon={faUser} /> */}
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">
+                      Another action
+                    </Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">
+                      Something else
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              ) : (
                 <Button variant="outline-info">註冊</Button>
-              </Link>
-              <Link to="/login">
-                <Button variant="outline-primary">登入</Button>
-              </Link>
+              )}
+
+              
+                {loginStatus ? (
+                  //  <Button variant="outline-primary">登出</Button>
+                  <div>
+                    <Link to="/login"></Link>
+                    <span>登出</span>
+                  </div>
+                ) : (
+                  <Button variant="outline-primary">登入</Button>
+                )}
               {/* <RegisteredModal show={RegisteredModalShow} onHide={() => setRegisteredModalShow(false)} />
             <LoginModal show={LoginModalShow} onHide={() => setLoginModalShow(false)}  /> */}
             </div>
