@@ -10,6 +10,7 @@ import System from "../../page/System";
 import Contract from "../Contract/Contract";
 import Example from "../../page/Example";
 import Logo from "../img/AI-logo.png";
+
 function Menu() {
   const [RegisteredModalShow, setRegisteredModalShow] = useState(false);
   const [LoginModalShow, setLoginModalShow] = useState(false);
@@ -18,9 +19,9 @@ function Menu() {
   return (
     <>
       <Router>
-        <section className="nav_section">
-          <nav className="nav_wrap">
-            <div id="nav_logo">
+        <section className="menuContainer">
+          <nav className="menuWrap">
+            <div id="menuLogo">
               <Link to="/">
                 <img
                   src={Logo}
@@ -30,7 +31,7 @@ function Menu() {
                 />
               </Link>
             </div>
-            <div className="nav_list">
+            <div className="menuList">
               <ul>
                 <Link to="/example">
                   <li>案例</li>
@@ -58,7 +59,7 @@ function Menu() {
                 {/* <li>5</li> */}
               </ul>
             </div>
-            <div className="nav_login">
+            <div className="menuLogin">
               <Link to="/signup">
                 <Button variant="outline-info">註冊</Button>
               </Link>
