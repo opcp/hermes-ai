@@ -17,21 +17,18 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 import userLogo from "../img/icon/user-circle-solid.svg";
 import Logo from "../img/AI-logo.png";
-import { useEffect } from "react";
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
 
 function Menu() {
   const [RegisteredModalShow, setRegisteredModalShow] = useState(false);
   const [LoginModalShow, setLoginModalShow] = useState(false);
   const [loginStatus, setStatus] = useState(true);
-  const [showDropdown,setDropdown] = useState(false)
-
-  // useEffect(()=>{
-
-  // },[showDropdown])
+  const [showDropdown, setDropdown] = useState(false);
 
   return (
     <>
       <Router>
+        <ScrollToTop />
         <section className="menuContainer">
           <nav className="menuMiddle">
             <div id="menuLogo">
@@ -61,12 +58,10 @@ function Menu() {
                 {loginStatus ? (
                   <Dropdown>
                     <li>
-                      <Dropdown.Toggle as={"div"}>
-                        購買點數
-                      </Dropdown.Toggle>
+                      <Dropdown.Toggle as={"div"}>購買點數</Dropdown.Toggle>
                       {/* <span onMouseEnter={() => setDropdown(true)}>購買點數</span> */}
                       {/* <FontAwesomeIcon icon={faUser} /> */}
-                      <Dropdown.Menu align={{ sm: "left" }}   >
+                      <Dropdown.Menu align={{ sm: "left" }}>
                         <Dropdown.Item as={Link} to="/Member">
                           目前可用點數
                         </Dropdown.Item>

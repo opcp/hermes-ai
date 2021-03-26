@@ -1,3 +1,5 @@
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 import ExampleCarousel from "../Carousel/ExampleCarousel";
 import Footer from "../Footer/Footer";
@@ -6,8 +8,40 @@ import Contract from "../Contract/Contract";
 function Home() {
   return (
     <>
-      <Header />
       <section className="homeContainer">
+        <section className="homeHeader homeCarouselText">
+          <div className="homeMiddle">
+            <div className="homeHeaderText">
+              <div className="homeHeaderAnimate">
+                <span>Get</span>
+                <span>started</span>
+                <span>with</span>
+                <span>easy</span>
+                <span>and</span>
+                <span>fast</span>
+                <span>AI</span>
+                <span>tool</span>
+                <p>
+                Explore Hermes AI, ready-to-use image recognition to suit your
+                specific needs.
+              </p>
+              </div>
+              {/* <p>Get started with</p>
+              <p>easy and fast AI tool</p> */}
+             
+              {/* <div className="homeHeaderBtn">
+                <Link to="/demo">
+                  <Button variant="primary">試用</Button>
+                </Link>
+                <Link to="/signup">
+                  <Button variant="info">註冊</Button>
+                </Link>
+              </div> */}
+            </div>
+          </div>
+        </section>
+        <ExampleCarousel />
+        {/* Hermes  */}
         <section className="homeHermesSection">
           <div className="homeMiddle">
             <div className="homeSectionTitle">
@@ -60,11 +94,13 @@ function Home() {
                 </div>
               </div>
               <div className="homeHermesBox revert">
-                <div  className="homeHermesBoxImg">
+                <div className="homeHermesBoxImg">
                   <img src={"https://picsum.photos/id/397/500/400"}></img>
                 </div>
-                <div  className="homeHermesBoxText">
-                  <h2>Connect your store to give regular emails a sales boost</h2>
+                <div className="homeHermesBoxText">
+                  <h2>
+                    Connect your store to give regular emails a sales boost
+                  </h2>
                   <span>
                     Do more with your marketing using the power of analytics.
                     Sync your store data and get pre-built customer segments
@@ -76,7 +112,8 @@ function Home() {
           </div>
         </section>
 
-        <div className="homeMiddle">
+        {/* Hermes Help */}
+        <section className="homeMiddle">
           {/* <ExampleCarousel /> */}
           <div className="homeSection">
             <div className="homeSectionTitle">
@@ -113,7 +150,7 @@ function Home() {
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </section>
       <Contract />
       <Footer />
