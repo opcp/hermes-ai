@@ -1,10 +1,122 @@
 import Header from "../Header/Header";
+import ExampleCarousel from "../Carousel/ExampleCarousel";
+import Footer from "../Footer/Footer";
+import Contract from "../Contract/Contract";
 
 function Home() {
   return (
     <>
       <Header />
-      <section className="homeContainer"></section>
+      <section className="homeContainer">
+        <section className="homeHermesSection">
+          <div className="homeMiddle">
+            <div className="homeSectionTitle">
+              <span> Hermes AI </span>
+            </div>
+            <div className="homeHermes">
+              <div className="homeHermesBox">
+                <div className="homeHermesBoxImg">
+                  <img src={"https://picsum.photos/id/337/500/400"}></img>
+                </div>
+                <div className="homeHermesBoxText">
+                  <h2>
+                    Connect your store to give regular emails a sales boost
+                  </h2>
+                  <span>
+                    Do more with your marketing using the power of analytics.
+                    Sync your store data and get pre-built customer segments
+                    based on purchase behavior to improve your sales.
+                  </span>
+                </div>
+              </div>
+              <div className="homeHermesBox revert">
+                <div className="homeHermesBoxImg">
+                  <img src={"https://picsum.photos/id/330/500/400"}></img>
+                </div>
+                <div className="homeHermesBoxText">
+                  <h2>
+                    Connect your store to give regular emails a sales boost
+                  </h2>
+                  <span>
+                    Do more with your marketing using the power of analytics.
+                    Sync your store data and get pre-built customer segments
+                    based on purchase behavior to improve your sales.
+                  </span>
+                </div>
+              </div>
+              <div className="homeHermesBox">
+                <div className="homeHermesBoxImg">
+                  <img src={"https://picsum.photos/id/137/500/400"}></img>
+                </div>
+                <div className="homeHermesBoxText">
+                  <h2>
+                    Connect your store to give regular emails a sales boost
+                  </h2>
+                  <span>
+                    Do more with your marketing using the power of analytics.
+                    Sync your store data and get pre-built customer segments
+                    based on purchase behavior to improve your sales.
+                  </span>
+                </div>
+              </div>
+              <div className="homeHermesBox revert">
+                <div  className="homeHermesBoxImg">
+                  <img src={"https://picsum.photos/id/397/500/400"}></img>
+                </div>
+                <div  className="homeHermesBoxText">
+                  <h2>Connect your store to give regular emails a sales boost</h2>
+                  <span>
+                    Do more with your marketing using the power of analytics.
+                    Sync your store data and get pre-built customer segments
+                    based on purchase behavior to improve your sales.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div className="homeMiddle">
+          {/* <ExampleCarousel /> */}
+          <div className="homeSection">
+            <div className="homeSectionTitle">
+              <span>We'll help you</span>
+            </div>
+
+            <div className="homeExample">
+              <div className="homeExampleCard">
+                <img src={"https://picsum.photos/id/337/300/200"}></img>
+                <h4>Award-winning support</h4>
+                <span>
+                  Get the help you need, whenever you need it with our 24/7
+                  support.
+                </span>
+                <a href="#">Learn More</a>
+              </div>
+              <div className="homeExampleCard">
+                <img src={"https://picsum.photos/id/637/300/200"}></img>
+                <h4>Award-winning support</h4>
+                <span>
+                  Get the help you need, whenever you need it with our 24/7
+                  support.
+                </span>
+                <a href="#">Learn More</a>
+              </div>
+              <div className="homeExampleCard">
+                <img src={"https://picsum.photos/id/377/300/200"}></img>
+                <h4>Award-winning support</h4>
+                <span>
+                  Get the help you need, whenever you need it with our 24/7
+                  support.
+                </span>
+                <a href="#">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <Contract />
+      <Footer />
     </>
   );
 }

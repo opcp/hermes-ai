@@ -9,20 +9,31 @@ import Purchase from "../../page/Purchase";
 import System from "../../page/System";
 import Contract from "../Contract/Contract";
 import Example from "../../page/Example";
-import Logo from "../img/AI-logo.png";
+import Member from "../../page/Member";
+import MemberOrder from "../../page/MemberOrder";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+
+import userLogo from "../img/icon/user-circle-solid.svg";
+import Logo from "../img/AI-logo.png";
+import { useEffect } from "react";
 
 function Menu() {
   const [RegisteredModalShow, setRegisteredModalShow] = useState(false);
   const [LoginModalShow, setLoginModalShow] = useState(false);
   const [loginStatus, setStatus] = useState(true);
+  const [showDropdown,setDropdown] = useState(false)
+
+  // useEffect(()=>{
+
+  // },[showDropdown])
 
   return (
     <>
       <Router>
         <section className="menuContainer">
-          <nav className="menuWrap">
+          <nav className="menuMiddle">
             <div id="menuLogo">
               <Link to="/">
                 <img
@@ -44,15 +55,38 @@ function Menu() {
                 <Link to="/POC">
                   <li>POC</li>
                 </Link>
-                {loginStatus ? (
-                  <Link to="/Purchase">
+                {/* <Link to="/purchase">
                     <li>購買點數</li>
-                  </Link>
+                  </Link> */}
+                {loginStatus ? (
+                  <Dropdown>
+                    <li>
+                      <Dropdown.Toggle as={"div"}>
+                        購買點數
+                      </Dropdown.Toggle>
+                      {/* <span onMouseEnter={() => setDropdown(true)}>購買點數</span> */}
+                      {/* <FontAwesomeIcon icon={faUser} /> */}
+                      <Dropdown.Menu align={{ sm: "left" }}   >
+                        <Dropdown.Item as={Link} to="/Member">
+                          目前可用點數
+                        </Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/MemberOrder">
+                          點數使用紀錄
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">
+                          點數購買紀錄
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">
+                          點數購買
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </li>
+                  </Dropdown>
                 ) : (
                   ""
                 )}
                 {loginStatus ? (
-                  <Link to="/System">
+                  <Link to="/system">
                     <li>使用系統</li>
                   </Link>
                 ) : (
@@ -64,15 +98,24 @@ function Menu() {
             <div className="menuLogin">
               {loginStatus ? (
                 // <FontAwesomeIcon icon={faUserCircle} className="userLogo" />
-                <Dropdown >
+                <Dropdown>
                   <Dropdown.Toggle as={"div"} className="userLogo">
                     <FontAwesomeIcon icon={faUserCircle} />
+                    <img
+                      src={userLogo}
+                      width="30"
+                      alt="User Logo"
+                      title="User Logo"
+                    ></img>
+                    <span>name</span>
                   </Dropdown.Toggle>
                   {/* <FontAwesomeIcon icon={faUser} /> */}
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">
-                      Another action
+                  <Dropdown.Menu align={{ sm: "left" }}>
+                    <Dropdown.Item as={Link} to="/Member">
+                      會員資料
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/MemberOrder">
+                      會員訂單
                     </Dropdown.Item>
                     <Dropdown.Item href="#/action-3">
                       Something else
@@ -83,16 +126,14 @@ function Menu() {
                 <Button variant="outline-info">註冊</Button>
               )}
 
-              
-                {loginStatus ? (
-                  //  <Button variant="outline-primary">登出</Button>
-                  <div>
-                    <Link to="/login"></Link>
-                    <span>登出</span>
-                  </div>
-                ) : (
-                  <Button variant="outline-primary">登入</Button>
-                )}
+              {loginStatus ? (
+                //  <Button variant="outline-primary">登出</Button>
+                <div className="userLogout">
+                  <span>登出</span>
+                </div>
+              ) : (
+                <Button variant="outline-primary">登入</Button>
+              )}
               {/* <RegisteredModal show={RegisteredModalShow} onHide={() => setRegisteredModalShow(false)} />
             <LoginModal show={LoginModalShow} onHide={() => setLoginModalShow(false)}  /> */}
             </div>
@@ -104,10 +145,12 @@ function Menu() {
           <Route path="/example" component={Example}></Route>
           <Route path="/demo" component={Contract}></Route>
           <Route path="/POC" component={Poc}></Route>
-          <Route path="/Purchase" component={Purchase}></Route>
-          <Route path="/System" component={System}></Route>
+          <Route path="/purchase" component={Purchase}></Route>
+          <Route path="/system" component={System}></Route>
           <Route path="/signup" component={SignUp}></Route>
           <Route path="/login" component={Login}></Route>
+          <Route path="/member" component={Member}></Route>
+          <Route path="/memberOrder" component={MemberOrder}></Route>
         </Switch>
       </Router>
     </>

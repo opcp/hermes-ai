@@ -1,8 +1,75 @@
 .homeContainer {
     @extend .mainContainer;
     @include flex_func();
-    .homeWrap {
-        @extend .mainBody;
-        @include flex_func();
+    .homeSectionTitle {
+        margin: $titleMargin 0;
+        font-size: $sectionTitle;
     }
+    .homeMiddle {
+        @extend .mainBody;
+        @include flex_func(center, center, column);
+        // min-height: 100vh;
+        .homeSection {
+            // height: 800px;
+            width: 100%;
+            text-align: center;
+            padding: 5rem 0;
+            @include flex_func(flex-start, center, column);
+
+            .homeExample {
+                width: 100%;
+                @include flex_func();
+            }
+            .homeExampleCard {
+                width: 100%;
+                padding: 0 5rem;
+                @include flex_func(flex-start, center, column);
+                h4 {
+                    margin: 2rem;
+                }
+                span {
+                    margin: 1rem 0;
+                }
+            }
+        }
+
+        .homeHermesSection {
+            width: 100%;
+            text-align: center;
+            padding: 5rem 0;
+            @include flex_func(flex-start, center, column);
+        }
+    }
+
+    .homeHermesSection {
+        @include flex_func(flex-start, center, column);
+        width: 100%;
+        background-color: rgba(209, 209, 209, 0.404);
+        // height: 100vh;
+        .homeHermes {
+            width: 100%;
+            .homeHermesBox {
+                width: 100%;
+                padding: 6rem 0;
+                @include flex_func(center, space-around);
+                div {
+                    width: 50%;
+                    margin: 0 2rem;;
+                }
+
+                .homeHermesBoxText{
+                    @include flex_func(center, center, column);
+                    span{
+                        padding: 2rem 0;
+                    }
+                }
+            }
+
+            .revert{
+                flex-direction: row-reverse;
+            }
+        }
+    }
+
+    
 }

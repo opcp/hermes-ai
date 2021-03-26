@@ -6,7 +6,7 @@ function Signup() {
   return (
     <>
       <section className="signUpContainer">
-        <div className="signUpWrap">
+        <div className="signUpMiddle">
           <div className="signUpLogo">
             <img src={logo} />
           </div>

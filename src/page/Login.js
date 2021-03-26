@@ -9,7 +9,7 @@ function Login() {
         className="loginContainer"
         style={{ backgroundImage: `url(${loginImage})` }}
       >
-        <div className="loginWrap">
+        <div className="loginMiddle">
           <div className="loginInput">
             <div className="loginLogo">
               <img src={logo} />

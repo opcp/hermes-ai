@@ -6,18 +6,11 @@
   right: 0;
   left: 0;
   z-index: 20;
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
   @include flex_func();
-  .menuWrap {
+  .menuMiddle {
     width: $bodyContainerWidth;
     height: 100%;
-    .userLogo{
-      &:after{
-        display: none;
-      }
-    }
-    // #memberDropdown &::after{
-    //   display: none !important;
-    // }
     div {
       height: 100%;
     }
@@ -30,13 +23,26 @@
       }
     }
     .menuList {
-      width: 70%;
+      width: 65%;
       @include flex_func();
       ul {
         margin: 0;
+        padding: 0;
         width: 100%;
         height: 100%;
         @include flex_func();
+        .dropdown {
+          width: 100%;
+          @include flex_func();
+          .dropdown-toggle{
+            &:after{
+              display: none;
+            }
+          }
+          .dropdown-menu {
+            height: auto;
+          }
+        }
         a {
           color: black;
           text-decoration: none;
@@ -44,11 +50,12 @@
         }
         li {
           @include flex_func();
+          cursor: pointer;
           color: rgb(0, 0, 0);
           width: 100%;
           list-style: none;
           transition: 0.3s;
-          font-size: 25px;
+          font-size: 1.5rem;
           &:hover {
             background-color: rgb(235, 235, 235);
           }
@@ -56,11 +63,38 @@
       }
     }
     .menuLogin {
-      width: 15%;
-      @include flex_func();
+      width: 20%;
+      @include flex_func(space-evenly);
       button {
         font-size: 20px;
         margin: 0 5px;
+      }
+      .dropdown {
+        width: 50%;
+        display: flex;
+
+        .dropdown-menu {
+          width: 100%;
+          height: auto;
+        }
+        .dropdown-item {
+          &:hover {
+            color: rgb(63, 133, 212);
+          }
+          &:active {
+            background: #fff;
+          }
+        }
+      }
+      .userLogo {
+        @include flex_func(space-around);
+        width: 100%;
+      }
+      .userList {
+        height: 15vh;
+      }
+      .userLogout {
+        @include flex_func();
       }
     }
   }

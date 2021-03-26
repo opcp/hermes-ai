@@ -6,7 +6,7 @@
   height: 80vh;
   width: 100%;
   @include flex_func(center);
-  .headerWrap {
+  .headerMiddle {
     width: $bodyContainerWidth;
     @include flex_func(center, flex-start, column);
   }

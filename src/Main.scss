@@ -29,3 +29,8 @@ body::-webkit-scrollbar {
     width: $bodyContainerWidth;
   }
 }
+
+footer {
+  text-align: center;
+  border-top: 1px solid #ccc;
+}

@@ -10,7 +10,7 @@ function Example() {
       <Header />
        <section className="mainContainer">
         <div className="mainBody">
-          <div className="cardWrap">
+          <div className="cardMiddle">
             <Card
               title={"title"}
               url={"https://picsum.photos/seed/picsum/300/200"}
@@ -31,42 +31,42 @@ function Example() {
               content={
                 "Create your own models using your own images or text with your own concepts."
               }
-            />{" "}
+            />
             <Card
               title={"title2"}
               url={"https://picsum.photos/id/257/200/300"}
               content={
                 "Create your own models using your own images or text with your own concepts."
               }
-            />{" "}
+            />
             <Card
               title={"title2"}
               url={"https://picsum.photos/id/337/200/300"}
               content={
                 "Create your own models using your own images or text with your own concepts."
               }
-            />{" "}
+            />
             <Card
               title={"title2"}
               url={"https://picsum.photos/id/637/200/300"}
               content={
                 "Create your own models using your own images or text with your own concepts."
               }
-            />{" "}
+            />
             <Card
               title={"title2"}
               url={"https://picsum.photos/id/297/200/300"}
               content={
                 "Create your own models using your own images or text with your own concepts."
               }
-            />{" "}
+            />
             <Card
               title={"title2"}
               url={"https://picsum.photos/id/817/200/300"}
               content={
                 "Create your own models using your own images or text with your own concepts."
               }
-            />{" "}
+            />
             <Card
               title={"title2"}
               url={"https://picsum.photos/id/377/200/300"}

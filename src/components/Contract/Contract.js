@@ -16,7 +16,7 @@ function Contract() {
             <p>second</p>
             <p>third</p>
           </div>
-          <div className="formWrap">
+          <div className="formMiddle">
             <Form>
               <Form.Group controlId="formGridAddress1">
                 <Form.Label>姓名*</Form.Label>

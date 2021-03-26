@@ -9,7 +9,7 @@ function Header() {
         style={{ backgroundImage: `url(${hermes})` }}
         className="headerContainer"
       >
-        <div className="headerWrap">
+        <div className="headerMiddle">
           <div id="container">
             {/* <h1>
               <span>
@@ -40,13 +40,9 @@ function Header() {
                 <i>Sketch</i>
               </span>
             </h1> */}
-            <h1>Get started with advanced pre-trained models</h1>
-            <br />
-            <p>
-              Create, prototype, collaborate, and bring your ideas to life with
-              the design platform used by over one million people — from
-              freelancers, to the world’s largest teams.
-            </p>
+            <p>Get started with easy and fast AI tool</p>
+            <p>Explore Hermes AI, ready-to-use image recognition</p>
+            <p>to suit your specific needs.</p>
             <Link to="/demo">
               <Button variant="outline-primary">試用</Button>
             </Link>
