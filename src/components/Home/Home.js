@@ -4,8 +4,24 @@ import Header from "../Header/Header";
 import ExampleCarousel from "../Carousel/ExampleCarousel";
 import Footer from "../Footer/Footer";
 import Contract from "../Contract/Contract";
+import { useRef } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Home() {
+  // const imageRef = useRef(null);
+  // const [scroll, setScroll] = useState();
+  AOS.init({
+    duration: 1200,
+  });
+
+  // let callback = (entries) => {
+  //   const [entry] = entries;
+  //   setIsVisible(entry.isIntersecting);
+  // };
+
   return (
     <>
       <section className="homeContainer">
@@ -22,13 +38,13 @@ function Home() {
                 <span>AI</span>
                 <span>tool</span>
                 <p>
-                Explore Hermes AI, ready-to-use image recognition to suit your
-                specific needs.
-              </p>
+                  Explore Hermes AI, ready-to-use image recognition to suit your
+                  specific needs.
+                </p>
               </div>
               {/* <p>Get started with</p>
               <p>easy and fast AI tool</p> */}
-             
+
               {/* <div className="homeHeaderBtn">
                 <Link to="/demo">
                   <Button variant="primary">試用</Button>
@@ -50,7 +66,10 @@ function Home() {
             <div className="homeHermes">
               <div className="homeHermesBox">
                 <div className="homeHermesBoxImg">
-                  <img src={"https://picsum.photos/id/337/500/400"}></img>
+                  <img
+                    data-aos="fade-right"
+                    src={"https://picsum.photos/id/337/500/400"}
+                  ></img>
                 </div>
                 <div className="homeHermesBoxText">
                   <h2>
@@ -65,7 +84,10 @@ function Home() {
               </div>
               <div className="homeHermesBox revert">
                 <div className="homeHermesBoxImg">
-                  <img src={"https://picsum.photos/id/330/500/400"}></img>
+                  <img
+                    data-aos="fade-left"
+                    src={"https://picsum.photos/id/330/500/400"}
+                  ></img>
                 </div>
                 <div className="homeHermesBoxText">
                   <h2>
@@ -80,7 +102,10 @@ function Home() {
               </div>
               <div className="homeHermesBox">
                 <div className="homeHermesBoxImg">
-                  <img src={"https://picsum.photos/id/137/500/400"}></img>
+                  <img
+                    data-aos="fade-right"
+                    src={"https://picsum.photos/id/137/500/400"}
+                  ></img>
                 </div>
                 <div className="homeHermesBoxText">
                   <h2>
@@ -95,7 +120,10 @@ function Home() {
               </div>
               <div className="homeHermesBox revert">
                 <div className="homeHermesBoxImg">
-                  <img src={"https://picsum.photos/id/397/500/400"}></img>
+                  <img
+                    data-aos="fade-left"
+                    src={"https://picsum.photos/id/397/500/400"}
+                  ></img>
                 </div>
                 <div className="homeHermesBoxText">
                   <h2>
@@ -122,7 +150,10 @@ function Home() {
 
             <div className="homeExample">
               <div className="homeExampleCard">
-                <img src={"https://picsum.photos/id/337/300/200"}></img>
+                <img
+                  data-aos="zoom-up"
+                  src={"https://picsum.photos/id/337/300/200"}
+                ></img>
                 <h4>Award-winning support</h4>
                 <span>
                   Get the help you need, whenever you need it with our 24/7
@@ -131,7 +162,10 @@ function Home() {
                 <a href="#">Learn More</a>
               </div>
               <div className="homeExampleCard">
-                <img src={"https://picsum.photos/id/637/300/200"}></img>
+                <img
+                  data-aos="zoom-up"
+                  src={"https://picsum.photos/id/637/300/200"}
+                ></img>
                 <h4>Award-winning support</h4>
                 <span>
                   Get the help you need, whenever you need it with our 24/7
@@ -140,7 +174,10 @@ function Home() {
                 <a href="#">Learn More</a>
               </div>
               <div className="homeExampleCard">
-                <img src={"https://picsum.photos/id/377/300/200"}></img>
+                <img
+                  data-aos="zoom-up"
+                  src={"https://picsum.photos/id/377/300/200"}
+                ></img>
                 <h4>Award-winning support</h4>
                 <span>
                   Get the help you need, whenever you need it with our 24/7

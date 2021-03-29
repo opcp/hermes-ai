@@ -87,8 +87,14 @@
         }
       }
       .userLogo {
-        @include flex_func(space-around);
+        @include flex_func(flex-start);
         width: 100%;
+        span{
+          padding-left: 10%;
+        }
+        &::after{
+          display: none;
+        }
       }
       .userList {
         height: 15vh;

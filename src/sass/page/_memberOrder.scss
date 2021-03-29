@@ -1,0 +1,10 @@
+.memberContainer {
+    @extend .mainContainer;
+    .memberBody {
+        @extend .mainBody;
+        margin: 2% 0;
+        td{
+            width: 50%;
+        }
+    }
+}

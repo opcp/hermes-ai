@@ -3,7 +3,7 @@ import { Carousel } from "react-bootstrap";
 function ExampleCarousel() {
   return (
     <>
-      <Carousel className="exampleCarousel" controls={false} indicators={false} interval={7000} slide={true} pause={false} >
+      <Carousel className="exampleCarousel" controls={false} indicators={false} interval={3000}  fade={true} pause={false} >
         <Carousel.Item>
           <img
             src="https://picsum.photos/seed/picsum/1920/780"

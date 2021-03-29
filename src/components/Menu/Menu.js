@@ -102,7 +102,7 @@ function Menu() {
                       alt="User Logo"
                       title="User Logo"
                     ></img>
-                    <span>name</span>
+                    <span>Shan</span>
                   </Dropdown.Toggle>
                   {/* <FontAwesomeIcon icon={faUser} /> */}
                   <Dropdown.Menu align={{ sm: "left" }}>
@@ -111,9 +111,6 @@ function Menu() {
                     </Dropdown.Item>
                     <Dropdown.Item as={Link} to="/MemberOrder">
                       會員訂單
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">
-                      Something else
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

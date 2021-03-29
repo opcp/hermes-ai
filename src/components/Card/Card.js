@@ -18,7 +18,6 @@ function Card(prop) {
   };
 
   useEffect(() => {
-    console.log(containerRef.current);
     const observer = new IntersectionObserver(callback, option);
     if (containerRef.current && !containerRef.current.dataset.isLoad) {
       observer.observe(containerRef.current);
@@ -27,7 +26,6 @@ function Card(prop) {
 
     return () => {
       if (containerRef.current) {
-        console.log('unobserve')
         observer.unobserve(containerRef.current);
       }
     };

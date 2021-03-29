@@ -2,7 +2,6 @@ import Header from "../components/Header/Header";
 import Contract from "../components/Contract/Contract";
 import Card from "../components/Card/Card";
 import Footer from '../components/Footer/Footer'
-import Login from "./Login";
 
 function Example() {
   return (
