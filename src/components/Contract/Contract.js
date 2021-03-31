@@ -1,5 +1,4 @@
 import { Form, Button } from "react-bootstrap";
-import { Col } from "react-bootstrap";
 
 function Contract() {
   return (

@@ -3,21 +3,61 @@ import { Form, Button, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../components/img/AI-logo.png";
 import credential from "../module/Credential/credential";
+import { useHistory } from 'react-router-dom';
+import { LogContext } from "../components/Menu/Menu"
 
-function Signup(prop) {
-  // let data = useContext()
-  const signUpFirebase = prop.location.func
 
- 
+function Signup() {
+  const status = useContext(LogContext)
+  const history = useHistory()
 
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [groupId, setGroupId] = useState(null);
+  function signIn(email, password) {
+    new Promise((res) => {
+      if (email && password) {
+        res(credential.signIn(email, password));
+      }
+    })
+      .then(() => {
+        status.setStatus(true)
+        history.push('/')
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-  const [formData, setFormData] = useState({});
 
-  const [isCompany, setIsCompany] = useState(true);
-  console.log(isCompany)
+  function signUp(email, password, option) {
+    new Promise((res) => {
+      if (email && password) {
+        res(credential.signUp(email, password, option));
+      }
+    })
+      .then(() => {
+        signIn(email, password);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+
+
+  // const [email, setEmail] = useState(null);
+  // const [password, setPassword] = useState(null);
+  // const [groupId, setGroupId] = useState(null);
+
+  const [formData, setFormData] = useState({
+    email: null,
+    password: null,
+    groupId: null,
+    isCompany: true
+  });
+
+  const { isCompany, groupId, password, email } = formData
+
+
+  console.log(formData)
   return (
     <>
       <section className="signUpContainer">
@@ -29,7 +69,7 @@ function Signup(prop) {
             <Form>
               <Form.Group id="formGridCheckbox">
                 <Form.Check
-                  onChange={() => setIsCompany(!isCompany)}
+                  onChange={() => setFormData({ ...formData, isCompany: !isCompany })}
                   value={isCompany}
                   type="checkbox"
                   label="是否加入現有企業帳戶底下?"
@@ -40,7 +80,7 @@ function Signup(prop) {
                 <Form.Label>企業ID</Form.Label>
                 <Form.Control
                   value={groupId}
-                  onChange={(e) => setGroupId(e.target.value)}
+                  onChange={(e) => setFormData({ ...formData, groupId: e.target.value })}
                   type="text"
                   placeholder="企業ID"
                 />
@@ -51,7 +91,7 @@ function Signup(prop) {
                 <Form.Control
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="Enter email"
                 />
               </Form.Group>
@@ -61,7 +101,7 @@ function Signup(prop) {
                 <Form.Control
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   placeholder="密碼"
                 />
               </Form.Group>
@@ -110,8 +150,9 @@ function Signup(prop) {
                 <Link to="/login">登入</Link>
 
                 <Button
+                  onClick={() => { }}
                   onClick={() =>
-                    signUpFirebase(email, password, {
+                    signUp(email, password, {
                       group_id: groupId,
                       isAdmin: isCompany,
                     })

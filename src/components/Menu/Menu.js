@@ -15,73 +15,40 @@ import MemberOrder from "../../page/MemberOrder";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
+import swal from 'sweetalert';
+
 import userLogo from "../img/icon/user-circle-solid.svg";
 import Logo from "../img/AI-logo.png";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 
-// Router API
-import { useHistory } from "react-router-dom";
-
 // firebase
 import credential from "../../module/Credential/credential";
 
+export const LogContext = createContext(null);
 function Menu() {
-  const [RegisteredModalShow, setRegisteredModalShow] = useState(false);
-  const [LoginModalShow, setLoginModalShow] = useState(false);
   const [loginStatus, setStatus] = useState(false);
 
-  function signIn(email, password) {
-    new Promise((res) => {
-      if (email && password) {
-        res(credential.signIn(email, password));
-      }
-    })
-      .then((data) => {
-        // window.location.href='/'
-        setStatus(true)
-        alert("登入成功");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+
 
   function signOut() {
     new Promise((res) => {
       res(credential.signOut());
     })
       .then((data) => {
-        // window.location.href='/'
         console.log(data);
         setStatus(false);
+        swal("登出成功", {
+          icon: 'success',
+          button: false,
+          timer: 2000,
+        });
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  function signUp(email, password, option) {
-    new Promise((res) => {
-      if (email && password) {
-        res(credential.signUp(email, password, option));
-      }
-    })
-      .then((data) => {
-        alert('註冊成功');
-        signIn(email, password);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
 
-  const logFunc = {
-    signIn,
-    signOut,
-    signUp,
-  };
-
-  const funcProvider = createContext(null);
 
   useEffect(() => {
     if (credential.user) {
@@ -91,8 +58,8 @@ function Menu() {
 
   return (
     <>
-      <Router>
-        <funcProvider.Provider value={logFunc}>
+      <LogContext.Provider value={{ loginStatus, setStatus }}>
+        <Router >
           <ScrollToTop />
           <section className="menuContainer">
             <nav className="menuMiddle">
@@ -160,14 +127,14 @@ function Menu() {
                   // <FontAwesomeIcon icon={faUserCircle} className="userLogo" />
                   <Dropdown>
                     <Dropdown.Toggle as={"div"} className="userLogo">
-                      <FontAwesomeIcon icon={faUserCircle} />
+                      {/* <FontAwesomeIcon icon={faUserCircle} /> */}
                       <img
                         src={userLogo}
                         width="30"
                         alt="User Logo"
                         title="User Logo"
                       ></img>
-                      {/* <span>Shan</span> */}
+                      <span>Shan</span>
                     </Dropdown.Toggle>
                     {/* <FontAwesomeIcon icon={faUser} /> */}
                     <Dropdown.Menu align={{ sm: "left" }}>
@@ -180,7 +147,7 @@ function Menu() {
                     </Dropdown.Menu>
                   </Dropdown>
                 ) : (
-                  <Link to={{ pathname: "/signup", func: signUp }}>
+                  <Link to="/signup" >
                     <Button variant="outline-info">註冊</Button>
                   </Link>
                 )}
@@ -193,7 +160,7 @@ function Menu() {
                     </Button>
                   </div>
                 ) : (
-                  <Link to={{ pathname: "/login", func: signIn }}>
+                  <Link to="/login">
                     <Button variant="outline-primary">登入</Button>
                   </Link>
                 )}
@@ -210,13 +177,14 @@ function Menu() {
             <Route path="/POC" component={Poc}></Route>
             <Route path="/purchase" component={Purchase}></Route>
             <Route path="/system" component={System}></Route>
-            <Route path="/signup" component={SignUp}></Route>
-            <Route path="/login" component={Login}></Route>
+            <Route path="/signup" component={() => <SignUp />}></Route>
+            <Route path="/login" component={() => <Login />}></Route>
             <Route path="/member" component={Member}></Route>
             <Route path="/memberOrder" component={MemberOrder}></Route>
           </Switch>
-        </funcProvider.Provider>
-      </Router>
+
+        </Router>
+      </LogContext.Provider>
     </>
   );
 }

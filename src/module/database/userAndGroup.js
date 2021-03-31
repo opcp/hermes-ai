@@ -1,4 +1,4 @@
-import dayjs from "dayjs"
+import dayjs from "dayjs";
 
 function getUserRefStr (uid) {
     return `/user/${uid}`

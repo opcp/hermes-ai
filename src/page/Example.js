@@ -82,7 +82,7 @@ function Example() {
           </div>
         </div>
       </section>
-      <Contract />
+      {/* <Contract /> */}
       <Footer />
     </>
   );

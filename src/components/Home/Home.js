@@ -1,12 +1,8 @@
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+
 import Header from "../Header/Header";
 import ExampleCarousel from "../Carousel/ExampleCarousel";
 import Footer from "../Footer/Footer";
 import Contract from "../Contract/Contract";
-import { useRef } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -67,6 +63,7 @@ function Home() {
               <div className="homeHermesBox">
                 <div className="homeHermesBoxImg">
                   <img
+                    alt="title"
                     data-aos="fade-right"
                     src={"https://picsum.photos/id/337/500/400"}
                   ></img>
@@ -189,7 +186,7 @@ function Home() {
           </div>
         </section>
       </section>
-      <Contract />
+      {/* <Contract /> */}
       <Footer />
     </>
   );
