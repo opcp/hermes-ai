@@ -61,7 +61,7 @@ function Home() {
         <section className="homeHermesSection">
           <div className="homeMiddle">
             <div className="homeSectionTitle">
-              <span> Hermes AI </span>
+              <span data-aos="zoom-out" > Hermes AI </span>
             </div>
             <div className="homeHermes">
               <div className="homeHermesBox">

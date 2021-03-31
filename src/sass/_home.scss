@@ -33,12 +33,12 @@
             }
         }
 
-        .homeHermesSection {
-            width: 100%;
-            text-align: center;
-            padding: 5rem 0;
-            @include flex_func(flex-start, center, column);
-        }
+        // .homeHermesSection {
+        //     width: 100%;
+        //     text-align: center;
+        //     padding: 5rem 0;
+        //     @include flex_func(flex-start, center, column);
+        // }
     }
 
     .homeHeader {
@@ -159,7 +159,6 @@
 }
 
 .homeCarouselText {
-    display: inline-block;
     position: absolute;
     top: 0;
     left: 0;
@@ -169,7 +168,7 @@
 }
 
 .exampleCarousel {
-    display: inline-block;
+    height: 780px;
     position: relative;
     top: 0;
     opacity: .7;

@@ -2,18 +2,23 @@
     @extend .mainContainer;
     background-color: rgb(64, 144, 224);
     padding: 2% 0;
+    height: 90vh;
     .signUpMiddle {
         padding: 2%;
-        width: 30vw;
-        border: 1px solid transparent;
+        width: 50%;
         border-radius: 2%;
         background-color: white;
-        .signUpLogo {
-            @include flex_func(center);
-        }
-        .signUpBtn {
-            button {
-                float: right;
+        .signUpForm {
+            .signUpLogo {
+                @include flex_func(center);
+                img{
+                    width: 50%;
+                }
+            }
+            .signUpBtn {
+                button {
+                    float: right;
+                }
             }
         }
     }
