@@ -8,7 +8,7 @@ function Signup(prop) {
   // let data = useContext()
   const signUpFirebase = prop.location.func
 
-  console.log(prop)
+ 
 
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -16,8 +16,8 @@ function Signup(prop) {
 
   const [formData, setFormData] = useState({});
 
-  const [isCompany, setIsCompany] = useState(false);
-
+  const [isCompany, setIsCompany] = useState(true);
+  console.log(isCompany)
   return (
     <>
       <section className="signUpContainer">
@@ -32,7 +32,7 @@ function Signup(prop) {
                   onChange={() => setIsCompany(!isCompany)}
                   value={isCompany}
                   type="checkbox"
-                  label="是否為企業用戶?"
+                  label="是否加入現有企業帳戶底下?"
                 />
               </Form.Group>
 
@@ -66,7 +66,7 @@ function Signup(prop) {
                 />
               </Form.Group>
 
-              {!isCompany ? (
+              {isCompany ? (
                 <>
                   <Form.Row>
                     <Form.Group as={Col}>

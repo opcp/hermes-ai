@@ -4,7 +4,7 @@ const SCAPI_KEY = '1448e4369aae19695ec23bb213aef211'
 
 export function singUp (user_id, password) {
     const {group} = credential
-    const {url, group_id} = url
+    const {url, group_id} = group
     const data = {
         key: SCAPI_KEY,
         group_id,
