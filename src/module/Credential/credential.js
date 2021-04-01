@@ -1,5 +1,5 @@
 import {checkIfGroupExist, createUser, createUserAndGroup, fetchUserAndGroup} from '../database/userAndGroup'
-import { singUp } from '../HermesAI/signUp'
+import { singUp as singUpToHermesAI } from '../HermesAI/signUp'
 
 class Credential {
     constructor() {
@@ -12,10 +12,10 @@ class Credential {
             user
         } = userCredential
         
-        const userAndGroup = await fetchUserAndGroup(user.uid)
+        const {user_name, group} = await fetchUserAndGroup(user.uid)
 
-        this.user = user
-        this.group = userAndGroup.group
+        this.user = Object.assign(user, {user_name, pw: btoa(password)})
+        this.group = group
         return this
     }
     async signOut() {
@@ -26,7 +26,8 @@ class Credential {
     async signUp(email, password, option = {}) {
         const {
             group_id,
-            isAdmin
+            isAdmin,
+            user_name
         } = option
         const isGroupExist = await checkIfGroupExist(group_id)
         if (isAdmin && isGroupExist) {
@@ -45,6 +46,8 @@ class Credential {
             user
         } = userCredential
         this.user = user
+        this.user.user_name = user_name
+        this.user.pw = btoa(password)
 
         if (isAdmin) {
             const {
@@ -52,16 +55,22 @@ class Credential {
             } = await createUserAndGroup(group_id, user.uid, option)
             this.group = group
         } else {
-            await createUser(group_id, user.uid)
+            await createUser(group_id, user.uid, user_name)
             const {group} = await fetchUserAndGroup(user.uid)
             this.group = group
         }
-        await singUp(email, password)
+        await singUpToHermesAI(email, password, user_name)
         return this
     }
     async toHermesAI () {
-        const {url} = this.group
-        window.open(url)
+        if (!this.group || !this.user) {
+            throw new Error('沒有登入')
+        }
+        const {url, group_id} = this.group
+        const {email: user_id, pw} = this.user
+        const time = new Date().getTime()
+        const fullUrl = `${url}/login.html?id=${btoa(group_id + '_' + user_id)}&pw=${pw}&time=${btoa(time)}`
+        window.open(fullUrl)
     }
 }
 const credential = new Credential()

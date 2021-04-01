@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Button, Dropdown } from "react-bootstrap";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import Home from "../Home/Home";
 import SignUp from "../../page/SignUp";
 import Login from "../../page/Login";
@@ -15,7 +15,7 @@ import MemberOrder from "../../page/MemberOrder";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 import userLogo from "../img/icon/user-circle-solid.svg";
 import Logo from "../img/AI-logo.png";
@@ -27,8 +27,7 @@ import credential from "../../module/Credential/credential";
 export const LogContext = createContext(null);
 function Menu() {
   const [loginStatus, setStatus] = useState(false);
-
-
+  const [userData, setUserData] = useState(null);
 
   function signOut() {
     new Promise((res) => {
@@ -38,28 +37,27 @@ function Menu() {
         console.log(data);
         setStatus(false);
         swal("登出成功", {
-          icon: 'success',
+          icon: "success",
           button: false,
-          timer: 2000,
+          timer: 2200,
         });
+        // window.location.href = "/";
       })
       .catch((error) => {
-        console.log(error);
+        console.warn(error);
       });
   }
-
-
 
   useEffect(() => {
     if (credential.user) {
       setStatus(true);
     }
-  }, [loginStatus]);
+  }, [loginStatus, userData]);
 
   return (
     <>
-      <LogContext.Provider value={{ loginStatus, setStatus }}>
-        <Router >
+      <LogContext.Provider value={{ loginStatus, setStatus, setUserData }}>
+        <Router>
           <ScrollToTop />
           <section className="menuContainer">
             <nav className="menuMiddle">
@@ -113,9 +111,7 @@ function Menu() {
                     ""
                   )}
                   {loginStatus ? (
-                    <Link to="/system">
-                      <li>使用系統</li>
-                    </Link>
+                    <li onClick={() => credential.toHermesAI()}>使用系統</li>
                   ) : (
                     ""
                   )}
@@ -134,7 +130,7 @@ function Menu() {
                         alt="User Logo"
                         title="User Logo"
                       ></img>
-                      <span>Shan</span>
+                      <span>{credential.group.user_name}</span>
                     </Dropdown.Toggle>
                     {/* <FontAwesomeIcon icon={faUser} /> */}
                     <Dropdown.Menu align={{ sm: "left" }}>
@@ -147,7 +143,7 @@ function Menu() {
                     </Dropdown.Menu>
                   </Dropdown>
                 ) : (
-                  <Link to="/signup" >
+                  <Link to="/signup">
                     <Button variant="outline-info">註冊</Button>
                   </Link>
                 )}
@@ -176,13 +172,11 @@ function Menu() {
             <Route path="/demo" component={Contract}></Route>
             <Route path="/POC" component={Poc}></Route>
             <Route path="/purchase" component={Purchase}></Route>
-            <Route path="/system" component={System}></Route>
             <Route path="/signup" component={() => <SignUp />}></Route>
             <Route path="/login" component={() => <Login />}></Route>
             <Route path="/member" component={Member}></Route>
             <Route path="/memberOrder" component={MemberOrder}></Route>
           </Switch>
-
         </Router>
       </LogContext.Provider>
     </>

@@ -36,30 +36,47 @@ export async function createUserAndGroup (group_id, uid, option = {}) {
     const groupRefStr = getGroupRefStr(group_id)
     const groupRef = conn.ref(groupRefStr)
     const now = dayjs().format('YYYY/MM/DD HH:mm:ss')
+    const {
+        user_name,
+        company_name,
+        company_tel,
+        company_address,
+        contact_person_name,
+        contact_person_tel,
+        contact_person_email,
+        ref_agent_id,
+    } = option
     const group = {
         agent_id: group_id,
-        url: "https://cloud.servtech.com.tw:59090/HermesAI/index.html", // TODO: 之後開放後台啟用帳戶就要拿掉
+        url: "https://cloud.servtech.com.tw:59090/HermesAI", // TODO: 之後開放後台啟用帳戶就要拿掉
         create_time: now,
         modify_time: now,
-        ...option
+        company_name,
+        company_tel,
+        company_address,
+        contact_person_name,
+        contact_person_tel,
+        contact_person_email,
+        ref_agent_id,
     }
 
     await groupRef.set(group)
     
-    const user = await createUser(group_id, uid)
+    const user = await createUser(group_id, uid, user_name)
 
     return {
         group,
         user
     }
 }
-export async function createUser (group_id, uid) {
+export async function createUser (group_id, uid, user_name) {
     const conn = firebase.database()
     const now = dayjs().format('YYYY/MM/DD HH:mm:ss')
     const userRefStr = getUserRefStr(uid)
     const userRef = conn.ref(userRefStr)
     const user = {
         user_id: uid,
+        user_name,
         group_id,
         create_time: now,
         modify_time: now,

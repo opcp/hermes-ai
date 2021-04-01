@@ -16,6 +16,8 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
+import credential from "../module/Credential/credential";
+import { useHistory } from "react-router";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -42,6 +44,15 @@ const tableIcons = {
 };
 
 function MemberOrder() {
+
+  const history = useHistory();
+  if (!credential.user) {
+    history.push("/");
+    return null
+  }
+
+
+
   return (
     <>
       <section className="memberContainer">

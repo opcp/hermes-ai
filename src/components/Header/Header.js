@@ -43,9 +43,9 @@ function Header() {
             <p>Get started with easy and fast AI tool</p>
             <p>Explore Hermes AI, ready-to-use image recognition</p>
             <p>to suit your specific needs.</p>
-            <Link to="/demo">
+            {/* <Link to="/demo">
               <Button variant="outline-primary">試用</Button>
-            </Link>
+            </Link> */}
             <Link to="/signup">
               <Button variant="outline-info">註冊</Button>
             </Link>
