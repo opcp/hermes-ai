@@ -6,7 +6,10 @@ function WebMap() {
           <div className="WebMap_list">
             <ul>
               <li>
-                <img alt="" src="https://f.hubspotusercontent20.net/hubfs/4505120/iso.svg" />
+                <img
+                  alt=""
+                  src="https://f.hubspotusercontent20.net/hubfs/4505120/iso.svg"
+                />
               </li>
               <li>2</li>
               <li>3</li>
@@ -28,7 +31,7 @@ function WebMap() {
       </section>
       <footer>Copyright</footer>
     </>
-  );
+  )
 }
 
-export default WebMap;
+export default WebMap

@@ -1,35 +1,35 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import { useRef } from "react";
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useRef } from 'react'
 
 function Card(prop) {
-  const containerRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef(null)
+  const [isVisible, setIsVisible] = useState(false)
 
   let callback = (entries) => {
-    const [entry] = entries;
-    setIsVisible(entry.isIntersecting);
-  };
+    const [entry] = entries
+    setIsVisible(entry.isIntersecting)
+  }
 
   let option = {
     root: null,
-    rootMargin: "0px",
+    rootMargin: '0px',
     threshold: 0.1,
-  };
+  }
 
   useEffect(() => {
-    const observer = new IntersectionObserver(callback, option);
+    const observer = new IntersectionObserver(callback, option)
     if (containerRef.current && !containerRef.current.dataset.isLoad) {
-      observer.observe(containerRef.current);
+      observer.observe(containerRef.current)
       containerRef.current.dataset.isLoad = true
     }
 
     return () => {
       if (containerRef.current) {
-        observer.unobserve(containerRef.current);
+        observer.unobserve(containerRef.current)
       }
-    };
-  }, [containerRef, option]);
+    }
+  }, [containerRef, option])
 
   // function callback(entries) {
   //   entries.forEach((element) => {
@@ -58,7 +58,7 @@ function Card(prop) {
       <div className="card">
         <div
           ref={containerRef}
-          style={{ backgroundImage: isVisible ? `url(${prop.url})` : "" }}
+          style={{ backgroundImage: isVisible ? `url(${prop.url})` : '' }}
           className="cardImage"
         ></div>
         <div className="cardText">
@@ -72,7 +72,7 @@ function Card(prop) {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default Card;
+export default Card

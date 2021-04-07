@@ -1,22 +1,23 @@
-@import "./sass/variable";
-@import "./sass/function";
-@import "./sass/home";
-@import "./sass/menu";
-@import "./sass/header";
-@import "./sass/page/example";
-@import "./sass/page/login";
-@import "./sass/page/signup";
-@import "./sass/page/memberOrder";
-@import "./sass/card";
-@import "./sass/contract";
-@import "./sass/.webMap";
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
+@import './sass/variable';
+@import './sass/function';
+@import './sass/home';
+@import './sass/menu';
+@import './sass/header';
+@import './sass/page/example';
+@import './sass/page/login';
+@import './sass/page/signup';
+@import './sass//page/buyPoints';
+@import './sass/page/memberOrder';
+@import './sass/card';
+@import './sass/contract';
+@import './sass/.webMap';
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
 
 body {
   margin: 0;
   padding: $menuPadding 0 0 0;
   // position: absolute;
-  font-family: "Noto Sans TC", sans-serif;
+  font-family: 'Noto Sans TC', sans-serif;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }

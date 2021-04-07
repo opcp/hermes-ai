@@ -1,62 +1,113 @@
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { Button, Dropdown } from "react-bootstrap";
-import { createContext, useEffect, useState } from "react";
-import Home from "../Home/Home";
-import SignUp from "../../page/SignUp";
-import Login from "../../page/Login";
-import Poc from "../../page/Poc";
-import Purchase from "../../page/Purchase";
-import System from "../../page/System";
-import Contract from "../Contract/Contract";
-import Example from "../../page/Example";
-import Member from "../../page/Member";
-import MemberOrder from "../../page/MemberOrder";
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { Button, Dropdown } from 'react-bootstrap'
+import { createContext, useEffect, useState } from 'react'
+import Home from '../Home/Home'
+import SignUp from '../../page/SignUp'
+import Login from '../../page/Login'
+import Poc from '../../page/Poc'
+import Purchase from '../../page/Purchase'
+import backendSystemAccount from '../../page/BackendSystemAccount'
+import BackendSystemOrder from '../../page/BackendSystemOrder'
+import Contract from '../Contract/Contract'
+import Example from '../../page/Example'
+import Member from '../../page/Member'
+import MemberOrder from '../../page/MemberOrder'
+import BupPoints from '../../page/point/BuyPoints'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
-import swal from "sweetalert";
+import swal from 'sweetalert'
 
-import userLogo from "../img/icon/user-circle-solid.svg";
-import Logo from "../img/AI-logo.png";
-import ScrollToTop from "../ScrollToTop/ScrollToTop";
+import userLogo from '../img/icon/user-circle-solid.svg'
+import Logo from '../img/AI-logo.png'
+import ScrollToTop from '../ScrollToTop/ScrollToTop'
 
 // firebase
-import credential from "../../module/Credential/credential";
+import credential from '../../module/controller/Credential/credential'
 
-export const LogContext = createContext(null);
+// material data table
+import { forwardRef } from 'react'
+import AddBox from '@material-ui/icons/AddBox'
+import ArrowDownward from '@material-ui/icons/ArrowDownward'
+import Check from '@material-ui/icons/Check'
+import ChevronLeft from '@material-ui/icons/ChevronLeft'
+import ChevronRight from '@material-ui/icons/ChevronRight'
+import Clear from '@material-ui/icons/Clear'
+import DeleteOutline from '@material-ui/icons/DeleteOutline'
+import Edit from '@material-ui/icons/Edit'
+import FilterList from '@material-ui/icons/FilterList'
+import FirstPage from '@material-ui/icons/FirstPage'
+import LastPage from '@material-ui/icons/LastPage'
+import Remove from '@material-ui/icons/Remove'
+import SaveAlt from '@material-ui/icons/SaveAlt'
+import Search from '@material-ui/icons/Search'
+import ViewColumn from '@material-ui/icons/ViewColumn'
+
+export const LogContext = createContext(null)
 function Menu() {
-  const [loginStatus, setStatus] = useState(false);
-  const [userData, setUserData] = useState(null);
+  const [loginStatus, setStatus] = useState(false)
+  const [userData, setUserData] = useState(null)
+  const [isAdmin, setAdmin] = useState(false)
+
+  // material table icon global useContext
+  const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    DetailPanel: forwardRef((props, ref) => (
+      <ChevronRight {...props} ref={ref} />
+    )),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => (
+      <ChevronLeft {...props} ref={ref} />
+    )),
+    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => (
+      <ArrowDownward {...props} ref={ref} />
+    )),
+    ThirdStateCheck: forwardRef((props, ref) => (
+      <Remove {...props} ref={ref} />
+    )),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+  }
 
   function signOut() {
     new Promise((res) => {
-      res(credential.signOut());
+      res(credential.signOut())
     })
       .then((data) => {
-        console.log(data);
-        setStatus(false);
-        swal("登出成功", {
-          icon: "success",
+        setStatus(false)
+        swal('登出成功', {
+          icon: 'success',
           button: false,
-          timer: 2200,
-        });
-        // window.location.href = "/";
+          timer: 2700,
+        })
+        // setTimeout(() => {
+        //   window.location.href = "/";
+        // }, 2700);
       })
       .catch((error) => {
-        console.warn(error);
-      });
+        console.warn(error)
+      })
   }
 
   useEffect(() => {
     if (credential.user) {
-      setStatus(true);
+      setStatus(true)
     }
-  }, [loginStatus, userData]);
+  }, [loginStatus, userData])
 
   return (
     <>
-      <LogContext.Provider value={{ loginStatus, setStatus, setUserData }}>
+      <LogContext.Provider value={{ loginStatus, setStatus, setUserData, setAdmin }}>
         <Router>
           <ScrollToTop />
           <section className="menuContainer">
@@ -82,38 +133,50 @@ function Menu() {
                   <Link to="/POC">
                     <li>POC</li>
                   </Link> */}
-                  {/* <Link to="/purchase">
-                    <li>購買點數</li>
-                  </Link> */}
+                  {isAdmin && (
+                    <Dropdown>
+                      <li>
+                        <Dropdown.Toggle as={'div'}>管理員後台</Dropdown.Toggle>
+                        <Dropdown.Menu align={{ md: 'left' }}>
+                          <Dropdown.Item as={Link} to="/backendSystemAccount">
+                            帳號審核
+                          </Dropdown.Item>
+                          <Dropdown.Item as={Link} to="/backendSystemOrder">
+                            訂單審核
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </li>
+                    </Dropdown>
+                  )}
                   {loginStatus ? (
                     <Dropdown>
                       <li>
-                        <Dropdown.Toggle as={"div"}>購買點數</Dropdown.Toggle>
+                        <Dropdown.Toggle as={'div'}>點數</Dropdown.Toggle>
                         {/* <span onMouseEnter={() => setDropdown(true)}>購買點數</span> */}
                         {/* <FontAwesomeIcon icon={faUser} /> */}
-                        <Dropdown.Menu align={{ sm: "left" }}>
+                        <Dropdown.Menu align={{ sm: 'left' }}>
                           <Dropdown.Item as={Link} to="/Member">
                             目前可用點數
                           </Dropdown.Item>
-                          <Dropdown.Item as={Link} to="/MemberOrder">
+                          <Dropdown.Item as={Link} to="/backendSystem">
                             點數使用紀錄
                           </Dropdown.Item>
                           <Dropdown.Item href="#/action-3">
                             點數購買紀錄
                           </Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">
+                          <Dropdown.Item as={Link} to="/buyPoints">
                             點數購買
                           </Dropdown.Item>
                         </Dropdown.Menu>
                       </li>
                     </Dropdown>
                   ) : (
-                    ""
+                    ''
                   )}
-                  {loginStatus ? (
+                  {loginStatus || isAdmin ? (
                     <li onClick={() => credential.toHermesAI()}>使用系統</li>
                   ) : (
-                    ""
+                    ''
                   )}
                   {/* <li>5</li> */}
                 </ul>
@@ -122,7 +185,7 @@ function Menu() {
                 {loginStatus ? (
                   // <FontAwesomeIcon icon={faUserCircle} className="userLogo" />
                   <Dropdown>
-                    <Dropdown.Toggle as={"div"} className="userLogo">
+                    <Dropdown.Toggle as={'div'} className="userLogo">
                       {/* <FontAwesomeIcon icon={faUserCircle} /> */}
                       <img
                         src={userLogo}
@@ -133,11 +196,11 @@ function Menu() {
                       <span>{credential.group.user_name}</span>
                     </Dropdown.Toggle>
                     {/* <FontAwesomeIcon icon={faUser} /> */}
-                    <Dropdown.Menu align={{ sm: "left" }}>
-                      <Dropdown.Item as={Link} to="/Member">
+                    <Dropdown.Menu align={{ sm: 'left' }}>
+                      <Dropdown.Item as={Link} to="/member">
                         會員資料
                       </Dropdown.Item>
-                      <Dropdown.Item as={Link} to="/MemberOrder">
+                      <Dropdown.Item as={Link} to="/memberOrder">
                         會員訂單
                       </Dropdown.Item>
                     </Dropdown.Menu>
@@ -173,14 +236,27 @@ function Menu() {
             <Route path="/POC" component={Poc}></Route>
             <Route path="/purchase" component={Purchase}></Route>
             <Route path="/signup" component={() => <SignUp />}></Route>
+            <Route path="/adminLogin" component={() => <Login admin={true} />}></Route>
             <Route path="/login" component={() => <Login />}></Route>
             <Route path="/member" component={Member}></Route>
-            <Route path="/memberOrder" component={MemberOrder}></Route>
+            <Route
+              path="/memberOrder"
+              component={() => <MemberOrder icon={tableIcons} />}
+            ></Route>
+            <Route path="/buyPoints" component={BupPoints}></Route>
+            <Route
+              path="/backendSystemAccount"
+              component={() => <backendSystemAccount icon={tableIcons} />}
+            ></Route>
+            <Route
+              path="/backendSystemOrder"
+              component={() => <BackendSystemOrder icon={tableIcons} />}
+            ></Route>
           </Switch>
         </Router>
       </LogContext.Provider>
     </>
-  );
+  )
 }
 
-export default Menu;
+export default Menu

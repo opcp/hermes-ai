@@ -1,9 +1,16 @@
-import { Carousel } from "react-bootstrap";
+import { Carousel } from 'react-bootstrap'
 
 function ExampleCarousel() {
   return (
     <>
-      <Carousel className="exampleCarousel" controls={false} indicators={false} interval={3000}  fade={true} pause={false} >
+      <Carousel
+        className="exampleCarousel"
+        controls={false}
+        indicators={false}
+        interval={3000}
+        fade={true}
+        pause={false}
+      >
         <Carousel.Item>
           <img
             src="https://picsum.photos/seed/picsum/1920/780"
@@ -11,20 +18,14 @@ function ExampleCarousel() {
           />
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            src="https://picsum.photos/id/337/1920/780"
-            alt="Second slide"
-          />
+          <img src="https://picsum.photos/id/337/1920/780" alt="Second slide" />
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            src="https://picsum.photos/id/437/1920/780"
-            alt="Third slide"
-          />
+          <img src="https://picsum.photos/id/437/1920/780" alt="Third slide" />
         </Carousel.Item>
       </Carousel>
     </>
-  );
+  )
 }
 
-export default ExampleCarousel;
+export default ExampleCarousel

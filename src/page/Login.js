@@ -1,53 +1,67 @@
-import { Form, Button } from "react-bootstrap";
-import loginImage from "../components/img/hermesAI.jpg";
-import logo from "../components/img/AI-logo-column.png";
-import credential from "../module/Credential/credential";
-import { useState, useContext } from "react";
-import { useHistory } from "react-router";
-import { LogContext } from "../components/Menu/Menu";
-import swal from "sweetalert";
+import { Form, Button } from 'react-bootstrap'
+import loginImage from '../components/img/hermesAI.jpg'
+import logo from '../components/img/AI-logo-column.png'
+import credential from '../module/controller/Credential/credential'
+import { useState, useContext, useEffect } from 'react'
+import { useHistory } from 'react-router'
+import { LogContext } from '../components/Menu/Menu'
+import swal from 'sweetalert'
 
-function Login() {
-  const [account, setAccount] = useState(null);
-  const [password, setPassword] = useState(null);
-  const status = useContext(LogContext);
-  const history = useHistory();
+function Login(prop) {
+  const [account, setAccount] = useState(null)
+  const [password, setPassword] = useState(null)
+  const status = useContext(LogContext)
+  const history = useHistory()
+  const [isAdmin, setAdmin] = useState(false)
 
-  console.log('123')
-  console.log(credential)
+  useEffect(() => {
+    if (prop.admin) {
+      setAdmin(true)
+    }
+  }, [isAdmin])
 
   function signIn(email, password) {
     new Promise((res) => {
       if (email && password) {
-        res(credential.signIn(email, password));
-        console.log(credential);
+        if (isAdmin) {
+          res(credential.signInAsAdmin(email, password))
+        } else {
+          res(credential.signIn(email, password))
+        }
+
+        console.log(credential)
       }
     })
       .then((data) => {
-        console.log(data);
-        swal("登入成功", "將在3秒後跳轉至首頁", "success", {
+        console.log(data)
+        swal('登入成功', '將在3秒後跳轉至首頁', 'success', {
           button: false,
           timer: 2700,
-        });
-        status.setStatus(true);
+        })
+        if (isAdmin) {
+          status.setAdmin(true)
+        } else {
+          status.setStatus(true)
+        }
+
         // status.setUserData(data.group);
         setTimeout(() => {
-          history.push("/");
-        }, 3000);
+          history.push('/')
+        }, 3000)
       })
       .catch((error) => {
-        console.log(error);
-        const { code } = error;
-        if (code === "auth/invalid-email") {
-          swal("帳號錯誤", {
-            icon: "error",
-          });
-        } else if (code === "auth/wrong-password") {
-          swal("密碼錯誤", {
-            icon: "error",
-          });
+        console.log(error)
+        const { code } = error
+        if (code === 'auth/invalid-email') {
+          swal('帳號錯誤', {
+            icon: 'error',
+          })
+        } else if (code === 'auth/wrong-password') {
+          swal('密碼錯誤', {
+            icon: 'error',
+          })
         }
-      });
+      })
   }
 
   return (
@@ -94,7 +108,7 @@ function Login() {
         </div>
       </section>
     </>
-  );
+  )
 }
 
-export default Login;
+export default Login

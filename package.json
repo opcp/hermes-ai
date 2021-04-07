@@ -15,6 +15,8 @@
     "aos": "^2.3.4",
     "bootstrap": "^4.6.0",
     "dayjs": "^1.10.4",
+    "formik": "^2.2.6",
+    "decimal.js": "^10.2.1",
     "material-table": "^1.69.2",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
@@ -24,22 +26,14 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "sweetalert": "^2.1.2",
-    "web-vitals": "^1.0.1"
+    "uuid": "^8.3.2",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "globals": {
-      "firebase": "readonly"
-    },
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -52,5 +46,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.1.0",
+    "prettier": "2.2.1"
   }
 }

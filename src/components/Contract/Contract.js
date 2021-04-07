@@ -1,4 +1,4 @@
-import { Form, Button } from "react-bootstrap";
+import { Form, Button } from 'react-bootstrap'
 
 function Contract() {
   return (
@@ -43,56 +43,56 @@ function Contract() {
                   custom
                   inline
                   label="1"
-                  type={"checkbox"}
+                  type={'checkbox'}
                   id={`1`}
                 />
                 <Form.Check
                   custom
                   inline
                   label="2"
-                  type={"checkbox"}
+                  type={'checkbox'}
                   id={`2`}
                 />
                 <Form.Check
                   custom
                   inline
                   label="1"
-                  type={"checkbox"}
+                  type={'checkbox'}
                   id={`1`}
                 />
                 <Form.Check
                   custom
                   inline
                   label="2"
-                  type={"checkbox"}
+                  type={'checkbox'}
                   id={`2`}
                 />
                 <Form.Check
                   custom
                   inline
                   label="1"
-                  type={"checkbox"}
+                  type={'checkbox'}
                   id={`1`}
                 />
                 <Form.Check
                   custom
                   inline
                   label="2"
-                  type={"checkbox"}
+                  type={'checkbox'}
                   id={`2`}
                 />
                 <Form.Check
                   custom
                   inline
                   label="1"
-                  type={"checkbox"}
+                  type={'checkbox'}
                   id={`1`}
                 />
                 <Form.Check
                   custom
                   inline
                   label="2"
-                  type={"checkbox"}
+                  type={'checkbox'}
                   id={`2`}
                 />
               </Form.Group>
@@ -108,7 +108,7 @@ function Contract() {
         </div>
       </section>
     </>
-  );
+  )
 }
 
-export default Contract;
+export default Contract

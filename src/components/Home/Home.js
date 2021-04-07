@@ -1,17 +1,16 @@
-
-import Header from "../Header/Header";
-import ExampleCarousel from "../Carousel/ExampleCarousel";
-import Footer from "../Footer/Footer";
-import Contract from "../Contract/Contract";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import Header from '../Header/Header'
+import ExampleCarousel from '../Carousel/ExampleCarousel'
+import Footer from '../Footer/Footer'
+import Contract from '../Contract/Contract'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 function Home() {
   // const imageRef = useRef(null);
   // const [scroll, setScroll] = useState();
   AOS.init({
     duration: 1200,
-  });
+  })
 
   // let callback = (entries) => {
   //   const [entry] = entries;
@@ -57,7 +56,7 @@ function Home() {
         <section className="homeHermesSection">
           <div className="homeMiddle">
             <div className="homeSectionTitle">
-              <span data-aos="zoom-out" > Hermes AI </span>
+              <span data-aos="zoom-out"> Hermes AI </span>
             </div>
             <div className="homeHermes">
               <div className="homeHermesBox">
@@ -65,7 +64,7 @@ function Home() {
                   <img
                     alt="title"
                     data-aos="fade-right"
-                    src={"https://picsum.photos/id/337/500/400"}
+                    src={'https://picsum.photos/id/337/500/400'}
                   ></img>
                 </div>
                 <div className="homeHermesBoxText">
@@ -83,7 +82,7 @@ function Home() {
                 <div className="homeHermesBoxImg">
                   <img
                     data-aos="fade-left"
-                    src={"https://picsum.photos/id/330/500/400"}
+                    src={'https://picsum.photos/id/330/500/400'}
                   ></img>
                 </div>
                 <div className="homeHermesBoxText">
@@ -101,7 +100,7 @@ function Home() {
                 <div className="homeHermesBoxImg">
                   <img
                     data-aos="fade-right"
-                    src={"https://picsum.photos/id/137/500/400"}
+                    src={'https://picsum.photos/id/137/500/400'}
                   ></img>
                 </div>
                 <div className="homeHermesBoxText">
@@ -119,7 +118,7 @@ function Home() {
                 <div className="homeHermesBoxImg">
                   <img
                     data-aos="fade-left"
-                    src={"https://picsum.photos/id/397/500/400"}
+                    src={'https://picsum.photos/id/397/500/400'}
                   ></img>
                 </div>
                 <div className="homeHermesBoxText">
@@ -149,7 +148,7 @@ function Home() {
               <div className="homeExampleCard">
                 <img
                   data-aos="zoom-up"
-                  src={"https://picsum.photos/id/337/300/200"}
+                  src={'https://picsum.photos/id/337/300/200'}
                 ></img>
                 <h4>Award-winning support</h4>
                 <span>
@@ -161,7 +160,7 @@ function Home() {
               <div className="homeExampleCard">
                 <img
                   data-aos="zoom-up"
-                  src={"https://picsum.photos/id/637/300/200"}
+                  src={'https://picsum.photos/id/637/300/200'}
                 ></img>
                 <h4>Award-winning support</h4>
                 <span>
@@ -173,7 +172,7 @@ function Home() {
               <div className="homeExampleCard">
                 <img
                   data-aos="zoom-up"
-                  src={"https://picsum.photos/id/377/300/200"}
+                  src={'https://picsum.photos/id/377/300/200'}
                 ></img>
                 <h4>Award-winning support</h4>
                 <span>
@@ -189,7 +188,7 @@ function Home() {
       {/* <Contract /> */}
       <Footer />
     </>
-  );
+  )
 }
 
-export default Home;
+export default Home

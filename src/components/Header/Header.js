@@ -1,6 +1,6 @@
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import hermes from "../img/hermes3.jpg";
+import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import hermes from '../img/hermes3.jpg'
 
 function Header() {
   return (
@@ -53,7 +53,7 @@ function Header() {
         </div>
       </section>
     </>
-  );
+  )
 }
 
-export default Header;
+export default Header

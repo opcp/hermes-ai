@@ -1,0 +1,15 @@
+.buyPointsBody {
+  @extend .mainBody;
+  text-align: center;
+  @include flex_func(center, center);
+  .buyPointsSection {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 50%;
+    margin-top: 10%;
+    border-radius: 20px;
+    .buyPointsButton {
+      @include flex_func(center);
+    }
+  }
+}

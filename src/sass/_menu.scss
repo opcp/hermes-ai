@@ -34,8 +34,8 @@
         .dropdown {
           width: 100%;
           @include flex_func();
-          .dropdown-toggle{
-            &:after{
+          .dropdown-toggle {
+            &:after {
               display: none;
             }
           }
@@ -77,9 +77,6 @@
           height: auto;
         }
         .dropdown-item {
-          &:hover {
-            color: rgb(63, 133, 212);
-          }
           &:active {
             background: #fff;
           }
@@ -88,10 +85,10 @@
       .userLogo {
         @include flex_func(flex-start);
         width: 100%;
-        span{
+        span {
           padding-left: 10%;
         }
-        &::after{
+        &::after {
           display: none;
         }
       }

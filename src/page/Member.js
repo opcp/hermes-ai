@@ -1,14 +1,14 @@
-import { Table } from "react-bootstrap";
-import { LogContext } from "../components/Menu/Menu";
-import { useState, useContext } from "react";
-import credential from "../module/Credential/credential";
-import { useHistory } from "react-router";
+import { Table } from 'react-bootstrap'
+import { LogContext } from '../components/Menu/Menu'
+import { useState, useContext } from 'react'
+import credential from '../module/controller/Credential/credential'
+import { useHistory } from 'react-router'
 
 function Member() {
-  const LogData = useContext(LogContext);
-  const history = useHistory();
+  const LogData = useContext(LogContext)
+  const history = useHistory()
   if (!credential.user) {
-    history.push("/");
+    history.push('/')
     return null
   }
 
@@ -22,7 +22,7 @@ function Member() {
     company_address,
     company_tel,
     create_time,
-  } = credential.group;
+  } = credential.group
 
   //   group:
   // agent_id: "test0401_2"
@@ -45,7 +45,7 @@ function Member() {
       <section className="memberContainer">
         <div className="memberBody">
           <h2>會員資料</h2>
-          <Table striped bordered hover size={"lg"}>
+          <Table striped bordered hover size={'lg'}>
             <tbody>
               <tr>
                 <td>企業ID</td>
@@ -92,7 +92,7 @@ function Member() {
         </div>
       </section>
     </>
-  );
+  )
 }
 
-export default Member;
+export default Member
