@@ -1,16 +1,24 @@
 .loginContainer {
   @extend .mainContainer;
-  background-repeat: no-repeat;
-  background-position: left;
-  background-size: cover;
-  height: 70vh;
+  // background-repeat: no-repeat;
+  // background-position: left;
+  // background-size: cover;
+  // height: 70vh;
+
   .loginMiddle {
-    @extend .mainBody;
+    // @extend .mainBody;
+    @media (max-width: 1300px) {
+      width: 90%;
+    }
+    width: 60vw;
     @include flex_func(flex-end);
     .loginInput {
+      @media (min-width: 1300px) {
+        width: 40%;
+      }
       background-color: white;
-      width: 40%;
-      height: 50vh;
+      width: 100%;
+      // height: 50vh;
       margin-top: 3%;
       padding: 2%;
       border: 1px solid #ccc;
@@ -23,6 +31,12 @@
         @include flex_func(center);
       }
       .loginBtn {
+        @media (max-width: 1300px) {
+          width: 100%;
+          button {
+            width: 100%;
+          }
+        }
         @include flex_func(flex-end);
       }
     }

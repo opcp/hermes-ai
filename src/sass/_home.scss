@@ -1,3 +1,4 @@
+@import './variable';
 .homeContainer {
   @extend .mainContainer;
   @include flex_func();
@@ -63,15 +64,15 @@
         // }
 
         .homeHeaderAnimate {
-          font-size: 4vw;
-          width: 70%;
-          word-break: keep-all;
-          color: rgba(0, 0, 0, 0.9);
+          // font-size: 4vw;
+          // width: 70%;
+          // word-break: keep-all;
+          // color: rgba(0, 0, 0, 0.9);
           span {
             display: inline-block;
-            margin-right: 2rem;
+            // margin-right: 2rem;
             position: relative;
-            top: 2rem;
+            // top: 2rem;
             opacity: 0;
             animation: 1s swift-up ease-out forwards,
               1s fade-in ease-out forwards;
@@ -107,12 +108,12 @@
             animation-delay: 1.1s;
           }
           p {
-            width: 80%;
-            margin: 2rem 0;
-            font-size: 2rem;
-            line-height: 4vw;
+            // width: 80%;
+            // margin: 2rem 0;
+            // font-size: 2rem;
+            // line-height: 4vw;
             position: relative;
-            top: 0.8rem;
+            // top: 0.8rem;
             opacity: 0;
             font-weight: lighter;
             overflow: hidden;
@@ -189,5 +190,16 @@
 @keyframes swift-up {
   to {
     top: 0rem;
+  }
+}
+
+#banner {
+  height: $bannerHeight;
+  background-color: #43aee3;
+  h1 {
+    font-size: 60px;
+  }
+  h4 {
+    font-size: 24px;
   }
 }

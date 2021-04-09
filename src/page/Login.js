@@ -4,8 +4,9 @@ import logo from '../components/img/AI-logo-column.png'
 import credential from '../module/controller/Credential/credential'
 import { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router'
-import { LogContext } from '../components/Menu/Menu'
+import { LogContext } from '../Main'
 import swal from 'sweetalert'
+import TextField from '@material-ui/core/TextField'
 
 function Login(prop) {
   const [account, setAccount] = useState(null)
@@ -28,13 +29,11 @@ function Login(prop) {
         } else {
           res(credential.signIn(email, password))
         }
-
-        console.log(credential)
       }
     })
-      .then((data) => {
+      .then(async (data) => {
         console.log(data)
-        swal('登入成功', '將在3秒後跳轉至首頁', 'success', {
+        await swal('登入成功', '將在3秒後跳轉至首頁', 'success', {
           button: false,
           timer: 2700,
         })
@@ -43,6 +42,8 @@ function Login(prop) {
         } else {
           status.setStatus(true)
         }
+
+        console.log(status.loginStatus)
 
         // status.setUserData(data.group);
         setTimeout(() => {
@@ -64,6 +65,12 @@ function Login(prop) {
       })
   }
 
+  const keypress = e => {
+    if (e.which === 13) {
+      signIn(account, password)
+    }
+  }
+
   return (
     <>
       <section
@@ -75,7 +82,7 @@ function Login(prop) {
             <div className="loginLogo">
               <img alt="hermesLogo" src={logo} />
             </div>
-            <Form>
+            <Form onKeyPress={keypress}>
               <Form.Group>
                 <Form.Label>帳號</Form.Label>
                 <Form.Control

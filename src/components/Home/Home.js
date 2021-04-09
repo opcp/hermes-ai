@@ -1,9 +1,26 @@
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  withRouter,
+} from 'react-router-dom'
 import Header from '../Header/Header'
 import ExampleCarousel from '../Carousel/ExampleCarousel'
 import Footer from '../Footer/Footer'
 import Contract from '../Contract/Contract'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Figure,
+  Card,
+  Image,
+} from 'react-bootstrap'
+import { LogContext } from '../../Main'
 
 function Home() {
   // const imageRef = useRef(null);
@@ -11,184 +28,162 @@ function Home() {
   AOS.init({
     duration: 1200,
   })
-
+  const { loginStatus } = LogContext
   // let callback = (entries) => {
   //   const [entry] = entries;
   //   setIsVisible(entry.isIntersecting);
   // };
 
   return (
-    <>
-      <section className="homeContainer">
-        <section className="homeHeader homeCarouselText">
-          <div className="homeMiddle">
-            <div className="homeHeaderText">
-              <div className="homeHeaderAnimate">
-                <span>Get</span>
-                <span>started</span>
-                <span>with</span>
-                <span>easy</span>
-                <span>and</span>
-                <span>fast</span>
-                <span>AI</span>
-                <span>tool</span>
-                <p>
-                  Explore Hermes AI, ready-to-use image recognition to suit your
-                  specific needs.
-                </p>
-              </div>
-              {/* <p>Get started with</p>
-              <p>easy and fast AI tool</p> */}
-
-              {/* <div className="homeHeaderBtn">
-                <Link to="/demo">
-                  <Button variant="primary">試用</Button>
+    <Container fluid className="p-0">
+      <Row id="banner">
+        <Container className="d-flex align-items-center text-light">
+          <Row className="justify-content-between">
+            <Col className="d-flex flex-column justify-content-center">
+              <Row as="h1" className="mb-2 flex-wrap">
+                <span className="text-nowrap">讓人好做事</span>
+                <span className="text-nowrap">讓事省時間</span>
+              </Row>
+              <Row as="h4" className="text-center">
+                不用寫程式即可簡單做出 AI 應用
+              </Row>
+              <Row as="h4" className="text-center mb-4">
+                快來體驗一站式的 AI 工具
+              </Row>
+              <Row>
+                {loginStatus && (
+                  <Link to="/signup">
+                    <Button size="lg" className="mr-2">
+                      開始試用
+                    </Button>
+                  </Link>
+                )}
+                <Link variant="primary" size="lg" to="/">
+                  <Button size="lg" variant="light">
+                    展示影片
+                  </Button>
                 </Link>
-                <Link to="/signup">
-                  <Button variant="info">註冊</Button>
-                </Link>
-              </div> */}
+              </Row>
+            </Col>
+            <Col>
+              <Image
+                width={600}
+                alt="hermes-ai-image-labeling"
+                src="https://f.hubspotusercontent20.net/hubfs/4505120/home/hero-image-automation.png"
+              />
+            </Col>
+          </Row>
+        </Container>
+      </Row>
+      <Row style={{ padding: '60px 0' }}>
+        <Container className="d-flex flex-column" style={{ rowGap: '80px' }}>
+          <Row
+            className="d-flex justify-content-center flex-gap-4"
+            style={{ columnGap: '100px' }}
+          >
+            <div>
+              <Image
+                width={200}
+                data-aos="fade-right"
+                alt="hermes-ai-image-labeling"
+                src="https://www.flaticon.com/premium-icon/icons/svg/820/820875.svg"
+              />
+            </div>
+            <div>
+              <Card bg="light" style={{ width: '300px', border: 'none' }}>
+                <Card.Title>Hermes AI Platform</Card.Title>
+                <Card.Text>
+                  提供簡單上手一站式平台，跨越學習門檻，從構想開始提供預測值，供用戶累積獨家知識
+                </Card.Text>
+              </Card>
+            </div>
+          </Row>
+          <Row
+            className="d-flex justify-content-center flex-gap-4"
+            style={{ columnGap: '100px' }}
+          >
+            <div>
+              <Card bg="light" style={{ width: '300px', border: 'none' }}>
+                <Card.Title>Pistis Data One-Stop AI</Card.Title>
+                <Card.Text>
+                  系統自動化處理數據特徵、模型尋找與評估，透過 AI
+                  技術使用戶加快進到商用見解之階段
+                </Card.Text>
+              </Card>
+            </div>
+            <div>
+              <Image
+                width={200}
+                data-aos="fade-left"
+                alt="hermes-ai-image-labeling"
+                src="https://www.flaticon.com/premium-icon/icons/svg/3061/3061284.svg"
+              />
+            </div>
+          </Row>
+          <Row
+            className="d-flex justify-content-center flex-gap-4"
+            style={{ columnGap: '100px' }}
+          >
+            <div>
+              <Image
+                width={200}
+                data-aos="fade-right"
+                alt="hermes-ai-image-labeling"
+                src="https://www.flaticon.com/premium-icon/icons/svg/901/901002.svg"
+              />
+            </div>
+            <div>
+              <Card bg="light" style={{ width: '300px', border: 'none' }}>
+                <Card.Title>Horus Easy-To-Use AI</Card.Title>
+                <Card.Text>
+                  簡單標記圖像服務、使用深度學習技術與辨識動作邏輯模組，可減少開發難度與時間投入
+                </Card.Text>
+              </Card>
+            </div>
+          </Row>
+        </Container>
+      </Row>
+      <Row style={{ padding: '60px 0' }} >
+        <Container>
+          <div className="d-flex justify-content-center flex-gap-4 " >
+            <div className="d-flex justify-content-center flex-column m-xl-4">
+              <Image
+                data-aos="zoom-up"
+                src={'https://picsum.photos/id/337/300/200'}
+              />
+              <h4>Award-winning support</h4>
+              <span>
+                Get the help you need, whenever you need it with our 24/7
+                support.
+              </span>
+            </div>
+            <div className="d-flex justify-content-center flex-column m-xl-4">
+              <Image
+                data-aos="zoom-up"
+                src={'https://picsum.photos/id/637/300/200'}
+              />
+              <h4>Award-winning support</h4>
+              <span>
+                Get the help you need, whenever you need it with our 24/7
+                support.
+              </span>
+            </div>
+            <div className="d-flex justify-content-center flex-column m-xl-4">
+              <Image
+                data-aos="zoom-up"
+                src={'https://picsum.photos/id/377/300/200'}
+              />
+              <h4>Award-winning support</h4>
+              <span>
+                Get the help you need, whenever you need it with our 24/7
+                support.
+              </span>
             </div>
           </div>
-        </section>
-        <ExampleCarousel />
-        {/* Hermes  */}
-        <section className="homeHermesSection">
-          <div className="homeMiddle">
-            <div className="homeSectionTitle">
-              <span data-aos="zoom-out"> Hermes AI </span>
-            </div>
-            <div className="homeHermes">
-              <div className="homeHermesBox">
-                <div className="homeHermesBoxImg">
-                  <img
-                    alt="title"
-                    data-aos="fade-right"
-                    src={'https://picsum.photos/id/337/500/400'}
-                  ></img>
-                </div>
-                <div className="homeHermesBoxText">
-                  <h2>
-                    Connect your store to give regular emails a sales boost
-                  </h2>
-                  <span>
-                    Do more with your marketing using the power of analytics.
-                    Sync your store data and get pre-built customer segments
-                    based on purchase behavior to improve your sales.
-                  </span>
-                </div>
-              </div>
-              <div className="homeHermesBox revert">
-                <div className="homeHermesBoxImg">
-                  <img
-                    data-aos="fade-left"
-                    src={'https://picsum.photos/id/330/500/400'}
-                  ></img>
-                </div>
-                <div className="homeHermesBoxText">
-                  <h2>
-                    Connect your store to give regular emails a sales boost
-                  </h2>
-                  <span>
-                    Do more with your marketing using the power of analytics.
-                    Sync your store data and get pre-built customer segments
-                    based on purchase behavior to improve your sales.
-                  </span>
-                </div>
-              </div>
-              <div className="homeHermesBox">
-                <div className="homeHermesBoxImg">
-                  <img
-                    data-aos="fade-right"
-                    src={'https://picsum.photos/id/137/500/400'}
-                  ></img>
-                </div>
-                <div className="homeHermesBoxText">
-                  <h2>
-                    Connect your store to give regular emails a sales boost
-                  </h2>
-                  <span>
-                    Do more with your marketing using the power of analytics.
-                    Sync your store data and get pre-built customer segments
-                    based on purchase behavior to improve your sales.
-                  </span>
-                </div>
-              </div>
-              <div className="homeHermesBox revert">
-                <div className="homeHermesBoxImg">
-                  <img
-                    data-aos="fade-left"
-                    src={'https://picsum.photos/id/397/500/400'}
-                  ></img>
-                </div>
-                <div className="homeHermesBoxText">
-                  <h2>
-                    Connect your store to give regular emails a sales boost
-                  </h2>
-                  <span>
-                    Do more with your marketing using the power of analytics.
-                    Sync your store data and get pre-built customer segments
-                    based on purchase behavior to improve your sales.
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Hermes Help */}
-        <section className="homeMiddle">
-          {/* <ExampleCarousel /> */}
-          <div className="homeSection">
-            <div className="homeSectionTitle">
-              <span>We'll help you</span>
-            </div>
-
-            <div className="homeExample">
-              <div className="homeExampleCard">
-                <img
-                  data-aos="zoom-up"
-                  src={'https://picsum.photos/id/337/300/200'}
-                ></img>
-                <h4>Award-winning support</h4>
-                <span>
-                  Get the help you need, whenever you need it with our 24/7
-                  support.
-                </span>
-                <a href="#">Learn More</a>
-              </div>
-              <div className="homeExampleCard">
-                <img
-                  data-aos="zoom-up"
-                  src={'https://picsum.photos/id/637/300/200'}
-                ></img>
-                <h4>Award-winning support</h4>
-                <span>
-                  Get the help you need, whenever you need it with our 24/7
-                  support.
-                </span>
-                <a href="#">Learn More</a>
-              </div>
-              <div className="homeExampleCard">
-                <img
-                  data-aos="zoom-up"
-                  src={'https://picsum.photos/id/377/300/200'}
-                ></img>
-                <h4>Award-winning support</h4>
-                <span>
-                  Get the help you need, whenever you need it with our 24/7
-                  support.
-                </span>
-                <a href="#">Learn More</a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </section>
-      {/* <Contract /> */}
-      <Footer />
-    </>
+        </Container>
+      </Row>
+    </Container>
   )
 }
 
-export default Home
+export default withRouter(Home)

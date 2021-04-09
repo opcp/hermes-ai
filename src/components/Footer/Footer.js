@@ -1,8 +1,14 @@
+import { Container, Row, Col } from 'react-bootstrap'
+
 function Footer() {
   return (
-    <>
-      <footer>&copy; 2021 Servtech, Inc.</footer>
-    </>
+    <Container className="bg-dark" fluid id="footer">
+      <Row className="p-1">
+        <Col as="footer" className="text-center text-light">
+          &copy; 2021 Servtech, Inc.
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

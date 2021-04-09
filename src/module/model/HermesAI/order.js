@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import { SCAPI_KEY } from '../../constants'
 import credential from '../../controller/Credential/credential'
+import { getFormattedDateTime } from '../../util'
 import { ajax } from './ajax'
 
 export async function fetchPurchaseRecord(group_id, domain) {
@@ -19,7 +20,7 @@ export async function fetchUseRecord(group_id, domain) {
   const response = await ajax(url)
   return response
 }
-export async function createOrder(group_id, domain, pur_point) {
+export async function createOrder(group_id, domain, pur_point, pur_time) {
   if (!group_id) {
     throw new Error('沒有給 group')
   } else if (!domain) {
@@ -28,12 +29,15 @@ export async function createOrder(group_id, domain, pur_point) {
     throw new Error('沒有登入')
   }
   const url = `${domain}/scapi/v1/ai/purchase-record`
+  const { user } = credential
+  const { email: user_id } = user
+  const pur_by = `${group_id}_${user_id}`
   const requestParam = {
     key: SCAPI_KEY,
     group_id,
     pur_point,
-    pur_time: dayjs().format('YYYY/MM/DD HH:mm:ss'),
-    pur_by: credential.user.user_id,
+    pur_time,
+    pur_by,
     is_remit: 'N',
   }
   const response = await ajax(url, {
@@ -45,7 +49,7 @@ export async function createOrder(group_id, domain, pur_point) {
   })
   return response
 }
-export async function updateOrder(group_id, domain, option = {}) {
+export async function updateOrder(group_id, domain, pur_time, option = {}) {
   if (!group_id) {
     throw new Error('沒有給 group')
   } else if (!domain) {
@@ -55,7 +59,7 @@ export async function updateOrder(group_id, domain, option = {}) {
   const requestParam = {
     key: SCAPI_KEY,
     group_id,
-    pur_time: dayjs().format('YYYY/MM/DD HH:mm:ss'),
+    pur_time,
     is_remit: 'Y',
     ...option,
   }

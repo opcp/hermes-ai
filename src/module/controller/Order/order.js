@@ -46,13 +46,13 @@ class Order {
     const { group, user } = credential
     const { email: user_id } = user || {}
     const { group_id, url: domain } = group || {}
-    const { order_id } = await createOrderAtDatabase(
+    const { order_id, create_time: pur_time } = await createOrderAtDatabase(
       group_id,
       package_id,
       user_id,
       amount
     )
-    await createOrderAtHermesAI(group_id, domain, pur_point)
+    await createOrderAtHermesAI(group_id, domain, pur_point, pur_time)
     await insertOrderLog(order_id, null, 0, user_id)
   }
 }

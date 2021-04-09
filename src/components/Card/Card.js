@@ -6,12 +6,12 @@ function Card(prop) {
   const containerRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
-  let callback = (entries) => {
+  const callback = (entries) => {
     const [entry] = entries
     setIsVisible(entry.isIntersecting)
   }
 
-  let option = {
+  const option = {
     root: null,
     rootMargin: '0px',
     threshold: 0.1,
@@ -64,11 +64,6 @@ function Card(prop) {
         <div className="cardText">
           <h3>{prop.title}</h3>
           <span>{prop.content}</span>
-        </div>
-        <div className="cardLink">
-          <a href="https://docs.clarifai.com/how-to/portal/pcustom-model-walkthrough">
-            Try it out
-          </a>
         </div>
       </div>
     </>

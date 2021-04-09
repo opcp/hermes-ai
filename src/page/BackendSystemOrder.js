@@ -9,6 +9,10 @@ import admin from '../module/controller/Admin/Admin'
 import { useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 import { fetchPackage } from '../module/model/database/package'
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import { DataUsage } from '@material-ui/icons'
+
 
 function BackendSystemOrder(prop) {
   // const history = useHistory()
@@ -29,21 +33,31 @@ function BackendSystemOrder(prop) {
 
   const [orderData, setData] = useState(null)
   const [pointTerm, getPointTerm] = useState(null)
+  const [isCheck, setCheck] = useState(0)
+  const [mapData, setMapData] = useState([])
 
-  const getOrderByStatus = (status = 0) => {
-    fetchOrderByStatus(status).then((data) => setData(data))
+  const getOrderByStatus = async (status = 0) => {
+    await fetchOrderByStatus(status).then((data) => setData(data))
   }
 
   useEffect(() => {
-    fetchPackage().then((data) => getPointTerm(Object.values(data)))
-    getOrderByStatus()
+    if (isCheck === 0) {
+      getOrderByStatus()
+    } else {
+      getOrderByStatus(1)
+    }
   }, [])
+
   console.log(orderData)
-  console.log(pointTerm)
+  console.log(isCheck)
+
+  // useEffect(() => {
+  //   fetchPackage().then((data) => getPointTerm(Object.values(data)))
+  //   getOrderByStatus()
+  // }, [])
 
   let data = []
   if (orderData && pointTerm) {
-    console.log('123')
     orderData.map((i) => {
       pointTerm.map((p) => {
         data.push({
@@ -65,25 +79,32 @@ function BackendSystemOrder(prop) {
         <div className="memberBody">
           <h2>訂單審核</h2>
           <div>
-            <Button onClick={() => getOrderByStatus(0)} variant="primary" style={{ marginRight: '20px' }}>
+            <Button onClick={() => setCheck(0)}
+              variant="primary" style={{ marginRight: '20px' }}>
               未審核
-              </Button>
-            <Button onClick={() => getOrderByStatus(1)} variant="success">
+            </Button>
+            <Button onClick={() => setCheck(1)}
+              variant="success">
               已審核
-             </Button>
+            </Button>
           </div>
           <div style={{ maxWidth: '100%' }}>
             <MaterialTable
               icons={prop.icon}
               columns={columns}
-              data={orderData ?? []}
-              actions={[
-                (rowData) => ({
-                  icon: 'check',
+              data={data ?? []}
+              actions={isCheck === 1 ? [] : [
+                {
+                  icon: CheckIcon,
                   tooltip: 'check order',
                   onClick: (event, rowData) =>
-                    admin.enableOrder(rowData.order_id),
-                }),
+                    admin.enableOrder(rowData.order_id, rowData.create_time),
+                },
+                {
+                  icon: ClearIcon,
+                  tooltip: 'cancel order',
+                  onClick: (event, rowData) => alert("You saved " + rowData.order_id)
+                }
               ]}
               options={{
                 actionsColumnIndex: -1,

@@ -7,14 +7,13 @@ import accessCheck from '../components/img/icon/checked.png'
 
 import credential from '../module/controller/Credential/credential'
 import { useHistory, Link } from 'react-router-dom'
-import { LogContext } from '../components/Menu/Menu'
+import { LogContext } from '../Main'
 
 import swal from 'sweetalert'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import TextField from '@material-ui/core/TextField'
 import TermModal from '../components/TermModal/TermModal'
-
 
 function Signup() {
   const status = useContext(LogContext)
@@ -178,7 +177,7 @@ function Signup() {
                   label="是否加入現有企業帳戶底下?"
                 />
               </Form.Group>
-
+              
               <Form.Group>
                 {/* <Form.Label>企業ID</Form.Label>
                 <Form.Control
@@ -196,7 +195,6 @@ function Signup() {
                   name="group_id"
                   label="企業ID"
                   type="text"
-                  placeholder="企業ID"
                   value={formik.values.group_id}
                   onChange={formik.handleChange}
                   error={
@@ -273,12 +271,12 @@ function Signup() {
                         formik.errors.contact_person_name
                       }
                     />
-                  </Form.Group>)}
+                  </Form.Group>
+                )}
               </Form.Row>
 
               {isCompany ? (
                 <>
-
                   <Form.Row>
                     <Form.Group as={Col}>
                       <TextField
@@ -286,7 +284,6 @@ function Signup() {
                         name="contact_person_email"
                         label="聯絡人信箱"
                         type="email"
-                        placeholder="聯絡人信箱"
                         value={formik.values.contact_person_email}
                         onChange={formik.handleChange}
                         error={
@@ -305,7 +302,6 @@ function Signup() {
                         name="contact_person_tel"
                         label="聯絡電話"
                         type="text"
-                        placeholder="聯絡電話"
                         value={formik.values.contact_person_tel}
                         onChange={formik.handleChange}
                         error={
@@ -328,7 +324,6 @@ function Signup() {
                         name="company_name"
                         label="公司名稱"
                         type="text"
-                        placeholder="公司名稱"
                         value={formik.values.company_name}
                         onChange={formik.handleChange}
                         error={
@@ -348,7 +343,6 @@ function Signup() {
                         name="company_address"
                         label="公司地址"
                         type="text"
-                        placeholder="公司地址"
                         value={formik.values.company_address}
                         onChange={formik.handleChange}
                         error={
@@ -371,7 +365,6 @@ function Signup() {
                         name="company_tel"
                         label="公司電話"
                         type="text"
-                        placeholder="公司電話"
                         value={formik.values.company_tel}
                         onChange={formik.handleChange}
                         error={
@@ -391,7 +384,6 @@ function Signup() {
                         name="tax_id"
                         label="稅籍編號"
                         type="text"
-                        placeholder="稅籍編號"
                         value={formik.values.tax_id}
                         onChange={formik.handleChange}
                         error={
@@ -411,7 +403,6 @@ function Signup() {
                       name="ref_agent_id"
                       label="推薦人 ID"
                       type="text"
-                      placeholder="推薦人 ID"
                       value={formik.values.ref_agent_id}
                       onChange={formik.handleChange}
                       error={
@@ -437,11 +428,7 @@ function Signup() {
               </div>
 
               <div className="signUpBtn">
-
-                <Button
-                  variant="primary"
-                  type="submit"
-                >
+                <Button variant="primary" type="submit">
                   確認送出
                 </Button>
               </div>

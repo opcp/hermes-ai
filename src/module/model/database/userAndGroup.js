@@ -46,6 +46,7 @@ export async function createUserAndGroup(group_id, uid, option = {}) {
     tax_id,
   } = option
   const group = {
+    group_id,
     agent_id: group_id,
     url: 'https://cloud.servtech.com.tw:59090/HermesAI', // TODO: 之後開放後台啟用帳戶就要拿掉
     create_time: now,
@@ -63,14 +64,14 @@ export async function createUserAndGroup(group_id, uid, option = {}) {
 
   await groupRef.set(group)
 
-  const user = await createUser(group_id, uid, user_name)
+  const user = await createUser(group_id, uid, user_name, option.password)
 
   return {
     group,
     user,
   }
 }
-export async function createUser(group_id, uid, user_name) {
+export async function createUser(group_id, uid, user_name, encodedPassword) {
   const conn = firebase.database()
   const now = dayjs().format('YYYY/MM/DD HH:mm:ss')
   const userRefStr = getUserRefStr(uid)
@@ -81,6 +82,7 @@ export async function createUser(group_id, uid, user_name) {
     group_id,
     create_time: now,
     modify_time: now,
+    password: encodedPassword,
   }
 
   await userRef.set(user)

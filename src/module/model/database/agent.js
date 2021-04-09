@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 function getAgentRefStr(agent_id) {
   return `/agent/${agent_id}`
 }
@@ -9,7 +11,7 @@ export async function fetchAgent(agent_id) {
     const agent = snapshot.val()
     return agent
   } catch (error) {
-    console.error('取得代理商資訊失敗', error.code, error.message)
+    console.warn('取得代理商資訊失敗', error.code, error.message)
   }
 }
 export async function checkIfAgentExist(agent_id) {
@@ -19,7 +21,7 @@ export async function checkIfAgentExist(agent_id) {
 export async function createAgent(agent_id) {
   const conn = firebase.database()
   const now = dayjs().format('YYYY/MM/DD HH:mm:ss')
-  const refStr = getAgentRefStr(uid)
+  const refStr = getAgentRefStr(agent_id)
   const ref = conn.ref(refStr)
   const agent = {
     agent_id,

@@ -1,11 +1,10 @@
 import { Table } from 'react-bootstrap'
-import { LogContext } from '../components/Menu/Menu'
-import { useState, useContext } from 'react'
+import { LogContext } from '../Main'
+import { useState } from 'react'
 import credential from '../module/controller/Credential/credential'
 import { useHistory } from 'react-router'
 
 function Member() {
-  const LogData = useContext(LogContext)
   const history = useHistory()
   if (!credential.user) {
     history.push('/')

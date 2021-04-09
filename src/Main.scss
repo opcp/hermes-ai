@@ -6,7 +6,7 @@
 @import './sass/page/example';
 @import './sass/page/login';
 @import './sass/page/signup';
-@import './sass//page/buyPoints';
+@import './sass/page/buyPoints';
 @import './sass/page/memberOrder';
 @import './sass/card';
 @import './sass/contract';
@@ -14,10 +14,10 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
 
 body {
-  margin: 0;
-  padding: $menuPadding 0 0 0;
+  // margin: 0;
+  // padding: $menuPadding 0 0 0;
   // position: absolute;
-  font-family: 'Noto Sans TC', sans-serif;
+  // font-family: 'Noto Sans TC', sans-serif;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
@@ -31,8 +31,22 @@ body::-webkit-scrollbar {
     width: $bodyContainerWidth;
   }
 }
-
-footer {
-  text-align: center;
-  border-top: 1px solid #ccc;
+#main-content {
+  min-height: $minMainContentHeight;
 }
+#footer {
+  height: $footerHeight;
+}
+#page-loader-container {
+  height: 100vh;
+  width: 100vw;
+  @include flex_func();
+  > div {
+    width: 120px;
+    height: 120px;
+  }
+}
+// footer {
+//   text-align: center;
+//   border-top: 1px solid #ccc;
+// }

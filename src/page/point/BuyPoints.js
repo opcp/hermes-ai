@@ -8,7 +8,7 @@ import { useHistory } from 'react-router'
 function BuyPoints() {
   const [pointTerm, getPointTerm] = useState(null)
   const [chooseTerm, nowTerm] = useState(null)
-  let history = useHistory()
+  const history = useHistory()
   
   useEffect(() => {
     fetchPackage().then((data) => getPointTerm(Object.values(data)))
@@ -16,7 +16,7 @@ function BuyPoints() {
 
   const buyPointsAPI = () => {
     if (chooseTerm) {
-      let data = pointTerm[chooseTerm]
+      const data = pointTerm[chooseTerm]
       const { package_id, points } = data
 
       new Promise((res) => {

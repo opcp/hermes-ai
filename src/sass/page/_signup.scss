@@ -1,44 +1,54 @@
 .signUpContainer {
-    @extend .mainContainer;
-    background-color: rgb(64, 144, 224);
-    padding:2% 0;
-    height: 90vh;
-    .signUpMiddle {
-        padding: 2%;
-        width: 50%;
-        height: 100vh;
-        border-radius: 2%;
-        background-color: white;
-        .signUpForm {
-            .signUpLogo {
-                @include flex_func(flex-end);
-                img{
-                    width: 30%;
-                }
-            }
-            .signUpTerms{
-                width: 100%;
-                font-size: 30px;
-                @include flex_func(flex-start,center,row);
-                img{
-                    width: 5%;
-                }
-                a{
-                    margin-left: 20px;
-                    text-decoration: none;
-                }
-            }
-            .signUpBtn {
-                font-size: 20px;
-                button {
-                    font-size: 30px;
-                    float: right;
-                }
-            }
-        }
+  @extend .mainContainer;
+  background-color: rgb(64, 144, 224);
+  padding: 2% 0;
+  // height: 90vh;
+  .signUpMiddle {
+    @media (min-width: 1300px) {
+      width: 50%;
     }
+    padding:20px 40px;
+    width: 90%;
+    // height: 100vh;
+    border-radius: 2%;
+    background-color: white;
+    .signUpForm {
+      .signUpLogo {
+        @include flex_func(flex-end);
+        img {
+          width: 30%;
+        }
+      }
+      .signUpTerms {
+        width: 100%;
+        font-size: 30px;
+        @include flex_func(flex-start, center, row);
+        img {
+          width: 5%;
+        }
+        a {
+          margin-left: 20px;
+          text-decoration: none;
+        }
+      }
+      .signUpBtn {
+        @include flex_func();
+        @media (max-width: 1300px) {
+          button {
+            // width: 100%;
+            margin-top: 30px;
+          }
+        }
+        font-size: 20px;
+        button {
+          font-size: 30px;
+          // float: right;
+        }
+      }
+    }
+  }
 }
 
-.modalWidth{
-    width: 100vw;
+.modalWidth {
+  width: 100vw;
 }

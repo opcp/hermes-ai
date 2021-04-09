@@ -11,7 +11,7 @@ class Admin {
   constructor() {
     this.user_id = null
   }
-  async enableOrder(order_id, remark = '') {
+  async enableOrder(order_id, pur_time, remark = '') {
     const { group } = credential
     const { group_id, url: domain } = group || {}
     if (!group_id || !domain || !this.user_id) {
@@ -22,7 +22,7 @@ class Admin {
       status: 1,
       user_id: this.user_id,
     })
-    await updateOrderToHermesAI(group_id, domain)
+    await updateOrderToHermesAI(group_id, domain, pur_time)
     await insertOrderLog(order_id, 0, 1, this.user_id)
   }
   async enableGroup(
