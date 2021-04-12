@@ -7,13 +7,14 @@ import { useHistory } from 'react-router'
 import { LogContext } from '../Main'
 import swal from 'sweetalert'
 import TextField from '@material-ui/core/TextField'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
 
 function Login(prop) {
-  const [account, setAccount] = useState(null)
-  const [password, setPassword] = useState(null)
   const status = useContext(LogContext)
   const history = useHistory()
   const [isAdmin, setAdmin] = useState(false)
+  const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
     if (prop.admin) {
@@ -31,8 +32,7 @@ function Login(prop) {
         }
       }
     })
-      .then(async (data) => {
-        console.log(data)
+      .then(async () => {
         await swal('登入成功', '將在3秒後跳轉至首頁', 'success', {
           button: false,
           timer: 2700,
@@ -43,15 +43,12 @@ function Login(prop) {
           status.setStatus(true)
         }
 
-        console.log(status.loginStatus)
-
-        // status.setUserData(data.group);
         setTimeout(() => {
           history.push('/')
         }, 3000)
       })
       .catch((error) => {
-        console.log(error)
+        setLoading(false)
         const { code } = error
         if (code === 'auth/invalid-email') {
           swal('帳號錯誤', {
@@ -65,49 +62,75 @@ function Login(prop) {
       })
   }
 
-  const keypress = e => {
-    if (e.which === 13) {
+  // const keypress = e => {
+  //   if (e.which === 13) {
+  //     signIn(account, password)
+  //   }
+  // }
+
+  let validationSchema = yup.object({
+    account: yup.string('請輸入帳號').required('此欄位必填'),
+    password: yup
+      .string('Enter your password')
+      .min(6, '密碼最少六位')
+      .required('此欄位必填'),
+  })
+
+  // formik
+  const formik = useFormik({
+    initialValues: {
+      account: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      const { account, password } = values
+      setLoading(true)
       signIn(account, password)
-    }
-  }
+    },
+  })
 
   return (
     <>
-      <section
-        className="loginContainer"
-        style={{ backgroundImage: `url(${loginImage})` }}
-      >
+      <section className="loginContainer">
         <div className="loginMiddle">
           <div className="loginInput">
             <div className="loginLogo">
               <img alt="hermesLogo" src={logo} />
             </div>
-            <Form onKeyPress={keypress}>
+            <Form onSubmit={formik.handleSubmit}>
               <Form.Group>
-                <Form.Label>帳號</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={account}
-                  onChange={(e) => setAccount(e.target.value)}
-                  placeholder="帳號"
+                <TextField
+                  fullWidth
+                  id="account"
+                  name="account"
+                  label="帳號"
+                  value={formik.values.account}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.account && Boolean(formik.errors.account)
+                  }
+                  helperText={formik.touched.account && formik.errors.account}
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>密碼</Form.Label>
-                <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="密碼"
+                <TextField
+                  fullWidth
+                  id="password"
+                  name="password"
+                  type='password'
+                  label="密碼"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.password && Boolean(formik.errors.password)
+                  }
+                  helperText={formik.touched.password && formik.errors.password}
                 />
               </Form.Group>
               <div className="loginBtn">
-                <Button
-                  onClick={() => signIn(account, password)}
-                  variant="primary"
-                  type="button"
-                >
-                  登入
+                <Button disabled={isLoading} variant="primary" type="submit">
+                  {isLoading ? '登入中' : '登入'}
                 </Button>
               </div>
             </Form>

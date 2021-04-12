@@ -8,6 +8,26 @@
     width: 50%;
     margin-top: 10%;
     border-radius: 20px;
+    .points_row {
+      @include flex_func(center, center, column);
+    }
+    .points_column {
+      padding: 0px;
+      width: 100%;
+      margin: 20px 0;
+      @include flex_func(space-around, flex-end);
+      flex-direction: row-reverse;
+      input {
+        margin: 0;
+        position: initial;
+        width: 100%;
+        height: 24px;
+      }
+      label {
+        color: black;
+        width: 100%;
+      }
+    }
     .buyPointsButton {
       @include flex_func(center);
     }

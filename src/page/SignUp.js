@@ -6,7 +6,7 @@ import notAccessCheck from '../components/img/icon/circle-regular.svg'
 import accessCheck from '../components/img/icon/checked.png'
 
 import credential from '../module/controller/Credential/credential'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { LogContext } from '../Main'
 
 import swal from 'sweetalert'
@@ -20,6 +20,7 @@ function Signup() {
   const history = useHistory()
   const [terms, setTerms] = useState(false)
   const [isCompany, setIsCompany] = useState(true)
+  const [isSubmit, setSubmit] = useState(false)
 
   function signIn(email, password) {
     new Promise((res) => {
@@ -65,7 +66,7 @@ function Signup() {
   let yup_obj
   if (!isCompany) {
     yup_obj = {
-      group_id: yup.string('請輸入企業ID').required('此欄位必填'),
+      group_id: yup.string('請輸入企業ID').matches(/[^\W_]/g, '不可有特殊符號').required('此欄位必填'),
       email: yup
         .string('Enter your email')
         .email('Enter a valid email')
@@ -78,7 +79,7 @@ function Signup() {
     }
   } else {
     yup_obj = {
-      group_id: yup.string('請輸入企業ID').required('此欄位必填'),
+      group_id: yup.string('請輸入企業ID').matches(/[^\W_]/g, '不可有特殊符號').required('此欄位必填'),
       email: yup
         .string('Enter your email')
         .email('Enter a valid email')
@@ -120,6 +121,9 @@ function Signup() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       if (terms) {
+
+        setSubmit(true)
+
         const {
           group_id,
           email,
@@ -169,27 +173,21 @@ function Signup() {
               <Link to="/login">登入</Link>
             </div> */}
             <Form onSubmit={formik.handleSubmit}>
-              <Form.Group id="formGridCheckbox">
-                <Form.Check
-                  onClick={() => setIsCompany(!isCompany)}
-                  value={isCompany}
-                  type="checkbox"
-                  label="是否加入現有企業帳戶底下?"
-                />
-              </Form.Group>
-              
               <Form.Group>
-                {/* <Form.Label>企業ID</Form.Label>
-                <Form.Control
-                  value={group_id}
-                  onChange={(e) =>
-                    setFormData({ ...formData, group_id: e.target.value })
-                  }
-                  type="text"
-                  // pattern="^[a-zA-Z0-9]*$"
-                  // title="請輸入英文數字組合"
-                  placeholder="企業ID"
-                /> */}
+                <Form.Check
+                  type="checkbox"
+                  id="isCompany_check"
+                >
+                  <Form.Check.Input
+                    onClick={() => setIsCompany(!isCompany)}
+                    value={isCompany}
+                    type='checkbox'
+                    isValid
+                  />
+                  <Form.Check.Label style={{ color: 'black' }} >是否加入現有企業帳戶底下</Form.Check.Label>
+                </Form.Check>
+              </Form.Group>
+              <Form.Group>
                 <TextField
                   fullWidth
                   name="group_id"
@@ -428,12 +426,10 @@ function Signup() {
               </div>
 
               <div className="signUpBtn">
-                <Button variant="primary" type="submit">
-                  確認送出
+                <Button disabled={isSubmit} variant="primary" type="submit">
+                  {isSubmit ? '已送出' : '確認送出'}
                 </Button>
               </div>
-              {/* 單位名稱 單位地址 單位電話 稅籍編號 使用者名稱 職稱 會員類型 單位登入代號 使用者登入帳號 代理商代碼 */}
-              {/* 個人資料 目前可用點數 點數使用紀錄 點數購買紀錄 點數購買 */}
             </Form>
           </div>
         </div>
