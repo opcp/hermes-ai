@@ -6,5 +6,13 @@ export async function fetchGroupByStatus(status) {
   const ref = conn.ref('/group')
   const snapshot = await ref.orderByChild('status').equalTo(status).get()
   const value = snapshot.val()
-  return Object.values(value)
+  return value ? Object.values(value) : []
+}
+
+export async function fetchAllGroup() {
+  const conn = firebase.database()
+  const ref = conn.ref('/group')
+  const snapshot = await ref.get()
+  const value = snapshot.val()
+  return value ? Object.values(value) : []
 }

@@ -1,3 +1,14 @@
-.member_container {
-  @extend .main;
+.info-table {
+  text-align: center;
+  .section-title {
+    background-color: #184a71;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .column-row {
+    background-color: #cecece;
+    font-size: 20px;
+    font-weight: 500;
+  }
 }

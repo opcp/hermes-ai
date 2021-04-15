@@ -1,5 +1,6 @@
 .signUpContainer {
   @extend .mainContainer;
+  @extend .main-content;
   background-color: rgb(64, 144, 224);
   padding: 2% 0;
   // height: 90vh;
@@ -33,17 +34,15 @@
       }
       .signUpBtn {
         @include flex_func();
-        @media (max-width: 1300px) {
-          button {
-            // width: 100%;
-            margin-top: 30px;
-          }
-        }
-        font-size: 20px;
-        button {
-          font-size: 30px;
-          // float: right;
-        }
+        // @media (max-width: 1300px) {
+        //   button {
+        //     margin-top: 30px;
+        //   }
+        // }
+        // font-size: 20px;
+        // button {
+        //   font-size: 30px;
+        // }
       }
     }
   }
@@ -51,4 +50,13 @@
 
 .modalWidth {
   width: 100vw;
+}
+
+.termTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 25px;
 }

@@ -1,96 +1,88 @@
-import { Table } from 'react-bootstrap'
-import { LogContext } from '../Main'
-import { useState } from 'react'
-import credential from '../module/controller/Credential/credential'
-import { useHistory } from 'react-router'
+import { Container, Table } from 'react-bootstrap'
+import { USER_STATUS_MAP } from '../module/constants'
 
-function Member() {
-  const history = useHistory()
-  if (!credential.user) {
-    history.push('/')
-    return null
-  }
-
-  const {
-    group_id,
-    contact_person_email,
-    contact_person_tel,
-    user_name,
-    contact_person_name,
-    company_name,
-    company_address,
-    company_tel,
-    create_time,
-  } = credential.group
-
-  //   group:
-  // agent_id: "test0401_2"
-  // company_address: "台北市"
-  // company_name: "servtech"
-  // company_tel: "0921321321"
-  // contact_person_email: "test0401_2@gmail.com"
-  // contact_person_name: "test0401_2"
-  // contact_person_tel: "0921321321"
-  // create_time: "2021/04/01 11:40:02"
-  // group_id: "test0401_2"
-  // isAdmin: true
-  // modify_time: "2021/04/01 11:40:02"
-  // tax_id: "43214321"
-  // url: "https://cloud.servtech.com.tw:59090/HermesAI/index.html"
-  // user_name: "test0401_2"
-
+function Member(props) {
   return (
-    <>
-      <section className="memberContainer">
-        <div className="memberBody">
-          <h2>會員資料</h2>
-          <Table striped bordered hover size={'lg'}>
-            <tbody>
-              <tr>
-                <td>企業ID</td>
-                <td>{group_id}</td>
+    <Container bg="light" className="pt-5 pb-5">
+      <Table bordered size={'lg'} className="info-table">
+        <tbody>
+          <tr className="section-title">
+            <td colSpan="2">會員資料</td>
+          </tr>
+          <tr className="column-row">
+            <td>會員帳號</td>
+            <td>使用者名稱</td>
+          </tr>
+          <tr>
+            <td>{props.email}</td>
+            <td>{props.user_name}</td>
+          </tr>
+          <tr className="column-row">
+            <td>狀態</td>
+            <td>建立時間</td>
+          </tr>
+          <tr>
+            <td>{USER_STATUS_MAP[props.user_status] ?? '---'}</td>
+            <td>{props.user_create_time}</td>
+          </tr>
+        </tbody>
+      </Table>
+      <Table bordered size={'lg'} className="info-table mt-4">
+        <tbody>
+          <tr className="section-title">
+            <td colSpan="2">企業資料</td>
+          </tr>
+          <tr className="column-row">
+            <td>企業編號</td>
+            <td>企業名稱</td>
+          </tr>
+          <tr>
+            <td>{props.group_id}</td>
+            <td>{props.company_name}</td>
+          </tr>
+          {props.is_group_admin || props.user_status !== 0 ? (
+            <>
+              <tr className="column-row">
+                <td>企業地址</td>
+                <td>企業電話</td>
               </tr>
               <tr>
-                <td>會員帳號</td>
-                <td>{contact_person_email}</td>
+                <td>{props.company_address}</td>
+                <td>{props.company_tel}</td>
               </tr>
-              <tr>
-                <td>使用者名稱</td>
-                <td>{user_name}</td>
-              </tr>
-              <tr>
-                <td>聯絡人姓名</td>
-                <td>{contact_person_name}</td>
-              </tr>
-              <tr>
+              <tr className="column-row">
+                <td>聯絡人名稱</td>
                 <td>聯絡人電話</td>
-                <td>{contact_person_tel}</td>
               </tr>
               <tr>
+                <td>{props.contact_person_name}</td>
+                <td>{props.contact_person_tel}</td>
+              </tr>
+              <tr className="column-row">
                 <td>聯絡人信箱</td>
-                <td>{contact_person_email}</td>
+                <td>稅籍編號</td>
               </tr>
               <tr>
-                <td>公司名稱</td>
-                <td>{company_name}</td>
+                <td>{props.contact_person_email}</td>
+                <td>{props.tax_id}</td>
+              </tr>
+              <tr className="column-row">
+                <td>建立時間</td>
+                <td></td>
               </tr>
               <tr>
-                <td>公司地址</td>
-                <td>{company_address}</td>
+                <td>{props.group_create_time}</td>
+                <td></td>
               </tr>
-              <tr>
-                <td>公司電話</td>
-                <td>{company_tel}</td>
-              </tr>
-              <tr>
-                <td>創建時間</td>
-                <td>{create_time}</td>
-              </tr>
-            </tbody>
-          </Table>
-        </div>
-      </section>
-    </>
+            </>
+          ) : (
+            <tr>
+              <td colSpan="2">目前企業正在審核中</td>
+            </tr>
+          )}
+        </tbody>
+      </Table>
+    </Container>
   )
 }
 

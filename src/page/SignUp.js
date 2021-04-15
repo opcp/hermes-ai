@@ -1,105 +1,54 @@
-import { useContext, useState, useEffect } from 'react'
-import { Form, Button, Col } from 'react-bootstrap'
-
-import logo from '../components/img/AI-logo.png'
-import notAccessCheck from '../components/img/icon/circle-regular.svg'
-import accessCheck from '../components/img/icon/checked.png'
-
+import { useContext, useState } from 'react'
+import { Form, Col, Spinner } from 'react-bootstrap'
+import logo from '../assets/img/Hermes-AI-logo-landscape-bg-transparent.png'
 import credential from '../module/controller/Credential/credential'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory, withRouter } from 'react-router-dom'
 import { LogContext } from '../Main'
-
 import swal from 'sweetalert'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import TextField from '@material-ui/core/TextField'
+import SendIcon from '@material-ui/icons/Send'
 import TermModal from '../components/TermModal/TermModal'
+import { Button, Checkbox, FormControlLabel, Grid } from '@material-ui/core'
+import LoadingButton from '@material-ui/lab/LoadingButton'
+import _ from 'lodash'
 
 function Signup() {
-  const status = useContext(LogContext)
+  const { setStatus } = useContext(LogContext)
   const history = useHistory()
-  const [terms, setTerms] = useState(false)
+  const [isOpenTerm, setIsOpenTerm] = useState(false)
+  const [loadingBtn, setLoadingBtn] = useState(false)
   const [isCompany, setIsCompany] = useState(true)
-  const [isSubmit, setSubmit] = useState(false)
 
-  function signIn(email, password) {
-    new Promise((res) => {
-      if (email && password) {
-        res(credential.signIn(email, password))
-      }
-    })
-      .then(() => {
-        status.setStatus(true)
-        history.push('/')
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+  const yup_obj = {
+    group_id: yup
+      .string('請輸入企業編號')
+      .matches(/[^.#$[\]_]+/g, '不可有特殊符號')
+      .required('此欄位必填'),
+    email: yup
+      .string('Enter your email')
+      .email('Enter a valid email')
+      .required('此欄位必填'),
+    password: yup
+      .string('Enter your password')
+      .min(6, 'Password should be of minimum 6 characters length')
+      .required('此欄位必填'),
+    user_name: yup.string('請輸入使用者名稱').required('此欄位必填'),
+    contact_person_name: yup.string('').required('此欄位必填'),
+    contact_person_email: yup.string('').required('此欄位必填').trim(),
+    contact_person_tel: yup.string('').required('此欄位必填').trim(),
+    company_name: yup.string('').required('此欄位必填').trim(),
+    company_address: yup.string('').required('此欄位必填').trim(),
+    company_tel: yup.string('').required('此欄位必填').trim(),
+    tax_id: yup.string('').required('此欄位必填').trim(),
   }
 
-  function signUp(email, password, option) {
-    new Promise((res) => {
-      if (email && password) {
-        res(credential.signUp(email, password, option))
-      }
-    })
-      .then(async () => {
-        await signIn(email, password)
-        swal('註冊成功', '將在3秒後跳轉至首頁', 'success', {
-          button: false,
-          timer: 1500,
-        })
-
-        setTimeout(() => {
-          history.push('/')
-        }, 3000)
-      })
-      .catch((error) => {
-        const { message } = error
-
-        swal(message, {
-          icon: 'error',
-        })
-      })
-  }
-
-  let yup_obj
-  if (!isCompany) {
-    yup_obj = {
-      group_id: yup.string('請輸入企業ID').matches(/[^\W_]/g, '不可有特殊符號').required('此欄位必填'),
-      email: yup
-        .string('Enter your email')
-        .email('Enter a valid email')
-        .required('此欄位必填'),
-      password: yup
-        .string('Enter your password')
-        .min(6, 'Password should be of minimum 6 characters length')
-        .required('此欄位必填'),
-      user_name: yup.string('請輸入使用者名稱').required('此欄位必填')
-    }
-  } else {
-    yup_obj = {
-      group_id: yup.string('請輸入企業ID').matches(/[^\W_]/g, '不可有特殊符號').required('此欄位必填'),
-      email: yup
-        .string('Enter your email')
-        .email('Enter a valid email')
-        .required('此欄位必填'),
-      password: yup
-        .string('Enter your password')
-        .min(6, 'Password should be of minimum 6 characters length')
-        .required('此欄位必填'),
-      user_name: yup.string('請輸入使用者名稱').required('此欄位必填'),
-      contact_person_name: yup.string('').required('此欄位必填'),
-      contact_person_email: yup.string('').required('此欄位必填').trim(),
-      contact_person_tel: yup.string('').required('此欄位必填').trim(),
-      company_name: yup.string('').required('此欄位必填').trim(),
-      company_address: yup.string('').required('此欄位必填').trim(),
-      company_tel: yup.string('').required('此欄位必填').trim(),
-      tax_id: yup.string('').required('此欄位必填').trim(),
-    }
-  }
-
-  const validationSchema = yup.object(yup_obj)
+  const validationSchema = yup.object(
+    isCompany
+      ? yup_obj
+      : _.pick(yup_obj, ['group_id', 'email', 'password', 'user_name'])
+  )
 
   // formik
   const formik = useFormik({
@@ -118,165 +67,180 @@ function Signup() {
       tax_id: '',
       user_name: '',
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: (values) => {
-      if (terms) {
-
-        setSubmit(true)
-
-        const {
-          group_id,
-          email,
-          password,
-          company_name,
-          company_address,
-          company_tel,
-          contact_person_name,
-          contact_person_tel,
-          contact_person_email,
-          ref_agent_id,
-          tax_id,
-          user_name,
-        } = values
-
-        signUp(email, password, {
-          group_id,
-          isAdmin: isCompany,
-          company_name,
-          company_address,
-          company_tel,
-          contact_person_name,
-          contact_person_tel,
-          contact_person_email,
-          ref_agent_id,
-          tax_id,
-          user_name,
-        })
-      } else {
-        swal('需同意使用者條款才可註冊', {
-          icon: 'error',
-        })
-      }
+      setIsOpenTerm(true)
     },
   })
+
+  async function onAgreeTerm() {
+    const {
+      group_id,
+      email,
+      password,
+      company_name,
+      company_address,
+      company_tel,
+      contact_person_name,
+      contact_person_tel,
+      contact_person_email,
+      ref_agent_id,
+      tax_id,
+      user_name,
+    } = formik.values
+    setIsOpenTerm(false)
+    setLoadingBtn(true)
+    try {
+      await credential.signUp(email, password, {
+        group_id,
+        isAdmin: isCompany,
+        company_name,
+        company_address,
+        company_tel,
+        contact_person_name,
+        contact_person_tel,
+        contact_person_email,
+        ref_agent_id,
+        tax_id,
+        user_name,
+      })
+      await setStatus(true)
+      await swal('註冊成功', '將在 3 秒後跳轉至首頁', 'success', {
+        button: false,
+        timer: 3000,
+      })
+      history.push('/')
+    } catch (error) {
+      const { message } = error
+
+      swal(message, {
+        icon: 'error',
+        button: false,
+      })
+    }
+    setLoadingBtn(false)
+  }
 
   return (
     <>
       <section className="signUpContainer">
-        <div className="signUpMiddle">
+        <div className="signUpMiddle shadow-lg">
           <div className="signUpForm">
             <div className="signUpLogo">
               <img alt="hermesLogo" src={logo} />
             </div>
-            {/* <div>
-              {`已有帳號? `}
-              <Link to="/login">登入</Link>
-            </div> */}
+            <div>
+              已有帳號？
+              <Link to="/login" className="ml-1">
+                登入
+              </Link>
+            </div>
             <Form onSubmit={formik.handleSubmit}>
-              <Form.Group>
-                <Form.Check
-                  type="checkbox"
-                  id="isCompany_check"
-                >
-                  <Form.Check.Input
-                    onClick={() => setIsCompany(!isCompany)}
-                    value={isCompany}
-                    type='checkbox'
-                    isValid
-                  />
-                  <Form.Check.Label style={{ color: 'black' }} >是否加入現有企業帳戶底下</Form.Check.Label>
-                </Form.Check>
-              </Form.Group>
-              <Form.Group>
-                <TextField
-                  fullWidth
-                  name="group_id"
-                  label="企業ID"
-                  type="text"
-                  value={formik.values.group_id}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.group_id && Boolean(formik.errors.group_id)
-                  }
-                  helperText={formik.touched.group_id && formik.errors.group_id}
-                />
-              </Form.Group>
-
-              <Form.Row>
-                <Form.Group as={Col}>
-                  <TextField
-                    fullWidth
-                    id="email"
-                    name="email"
-                    label="Email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
-                  />
-                </Form.Group>
-                <Form.Group as={Col}>
-                  <TextField
-                    fullWidth
-                    id="password"
-                    name="password"
-                    label="Password"
-                    type="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.password && Boolean(formik.errors.password)
-                    }
-                    helperText={
-                      formik.touched.password && formik.errors.password
-                    }
-                  />
-                </Form.Group>
-              </Form.Row>
-              <Form.Row>
-                <Form.Group as={Col}>
-                  <TextField
-                    fullWidth
-                    name="user_name"
-                    label="使用者名稱"
-                    type="text"
-                    value={formik.values.user_name}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.user_name &&
-                      Boolean(formik.errors.user_name)
-                    }
-                    helperText={
-                      formik.touched.user_name && formik.errors.user_name
-                    }
-                  />
-                </Form.Group>
-                {isCompany && (
-                  <Form.Group as={Col}>
+              <Grid container className="mb-4">
+                <Grid container spacing={2}>
+                  <Grid item lg={6} sm={12} xs={12}>
                     <TextField
                       fullWidth
-                      name="contact_person_name"
-                      label="聯絡人名稱"
-                      type="text"
-                      value={formik.values.contact_person_name}
+                      id="email"
+                      name="email"
+                      label="Email"
+                      value={formik.values.email}
                       onChange={formik.handleChange}
                       error={
-                        formik.touched.contact_person_name &&
-                        Boolean(formik.errors.contact_person_name)
+                        formik.touched.email && Boolean(formik.errors.email)
+                      }
+                      helperText={formik.touched.email && formik.errors.email}
+                    />
+                  </Grid>
+                  <Grid item lg={6} sm={12} xs={12}>
+                    <TextField
+                      fullWidth
+                      id="password"
+                      name="password"
+                      label="Password"
+                      type="password"
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.password &&
+                        Boolean(formik.errors.password)
                       }
                       helperText={
-                        formik.touched.contact_person_name &&
-                        formik.errors.contact_person_name
+                        formik.touched.password && formik.errors.password
                       }
                     />
-                  </Form.Group>
-                )}
-              </Form.Row>
-
-              {isCompany ? (
-                <>
-                  <Form.Row>
-                    <Form.Group as={Col}>
+                  </Grid>
+                  <Grid item lg={6} sm={12} xs={12}>
+                    <TextField
+                      fullWidth
+                      name="user_name"
+                      label="使用者名稱"
+                      type="text"
+                      value={formik.values.user_name}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.user_name &&
+                        Boolean(formik.errors.user_name)
+                      }
+                      helperText={
+                        formik.touched.user_name && formik.errors.user_name
+                      }
+                    />
+                  </Grid>
+                  <Grid item lg={6} sm={12} xs={12}>
+                    <TextField
+                      fullWidth
+                      name="group_id"
+                      label="企業編號"
+                      type="text"
+                      value={formik.values.group_id}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.group_id &&
+                        Boolean(formik.errors.group_id)
+                      }
+                      helperText={
+                        formik.touched.group_id && formik.errors.group_id
+                      }
+                    />
+                  </Grid>
+                  <Grid item sm={12} xs={12}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          id="isCompany_check"
+                          checked={isCompany}
+                          onChange={() => setIsCompany(!isCompany)}
+                          name="checkedA"
+                          color="primary"
+                          isValid
+                        />
+                      }
+                      label="註冊新的企業帳號"
+                    />
+                  </Grid>
+                </Grid>
+                {isCompany && (
+                  <Grid container spacing={2}>
+                    <Grid item sm={12} xs={12}>
+                      <TextField
+                        fullWidth
+                        name="contact_person_name"
+                        label="聯絡人名稱"
+                        type="text"
+                        value={formik.values.contact_person_name}
+                        onChange={formik.handleChange}
+                        error={
+                          formik.touched.contact_person_name &&
+                          Boolean(formik.errors.contact_person_name)
+                        }
+                        helperText={
+                          formik.touched.contact_person_name &&
+                          formik.errors.contact_person_name
+                        }
+                      />
+                    </Grid>
+                    <Grid item lg={6} sm={12} xs={12}>
                       <TextField
                         fullWidth
                         name="contact_person_email"
@@ -293,8 +257,8 @@ function Signup() {
                           formik.errors.contact_person_email
                         }
                       />
-                    </Form.Group>
-                    <Form.Group as={Col}>
+                    </Grid>
+                    <Grid item lg={6} sm={12} xs={12}>
                       <TextField
                         fullWidth
                         name="contact_person_tel"
@@ -311,11 +275,8 @@ function Signup() {
                           formik.errors.contact_person_tel
                         }
                       />
-                    </Form.Group>
-                  </Form.Row>
-
-                  <Form.Row>
-                    <Form.Group as={Col}>
+                    </Grid>
+                    <Grid item sm={12} xs={12}>
                       <TextField
                         fullWidth
                         id="company_name"
@@ -333,8 +294,8 @@ function Signup() {
                           formik.errors.company_name
                         }
                       />
-                    </Form.Group>
-                    <Form.Group as={Col}>
+                    </Grid>
+                    <Grid item lg={6} sm={12} xs={12}>
                       <TextField
                         fullWidth
                         id="company_address"
@@ -352,11 +313,8 @@ function Signup() {
                           formik.errors.company_address
                         }
                       />
-                    </Form.Group>
-                  </Form.Row>
-
-                  <Form.Row>
-                    <Form.Group as={Col}>
+                    </Grid>
+                    <Grid item lg={6} sm={12} xs={12}>
                       <TextField
                         fullWidth
                         id="company_tel"
@@ -374,8 +332,8 @@ function Signup() {
                           formik.errors.company_tel
                         }
                       />
-                    </Form.Group>
-                    <Form.Group as={Col}>
+                    </Grid>
+                    <Grid item lg={6} sm={12} xs={12}>
                       <TextField
                         fullWidth
                         id="tax_id"
@@ -391,50 +349,50 @@ function Signup() {
                           formik.touched.tax_id && formik.errors.tax_id
                         }
                       />
-                    </Form.Group>
-                  </Form.Row>
-
-                  <Form.Group>
-                    <TextField
-                      fullWidth
-                      id="ref_agent_id"
-                      name="ref_agent_id"
-                      label="推薦人 ID"
-                      type="text"
-                      value={formik.values.ref_agent_id}
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.ref_agent_id &&
-                        Boolean(formik.errors.ref_agent_id)
-                      }
-                      helperText={
-                        formik.touched.ref_agent_id &&
-                        formik.errors.ref_agent_id
-                      }
-                    />
-                  </Form.Group>
-                </>
-              ) : (
-                ''
-              )}
-              <div className="signUpTerms">
-                <img alt="access" src={terms ? accessCheck : notAccessCheck} />
-                {/* <a href="#" onClick={() => ModalShow(true)}>
-                  需同意使用者條款
-                </a> */}
-                <TermModal setTerms={setTerms} />
-              </div>
-
+                    </Grid>
+                    <Grid item lg={6} sm={12} xs={12}>
+                      <TextField
+                        fullWidth
+                        id="ref_agent_id"
+                        name="ref_agent_id"
+                        label="推薦人代碼"
+                        type="text"
+                        value={formik.values.ref_agent_id}
+                        onChange={formik.handleChange}
+                        error={
+                          formik.touched.ref_agent_id &&
+                          Boolean(formik.errors.ref_agent_id)
+                        }
+                        helperText={
+                          formik.touched.ref_agent_id &&
+                          formik.errors.ref_agent_id
+                        }
+                      />
+                    </Grid>
+                  </Grid>
+                )}
+              </Grid>
               <div className="signUpBtn">
-                <Button disabled={isSubmit} variant="primary" type="submit">
-                  {isSubmit ? '已送出' : '確認送出'}
-                </Button>
+                <LoadingButton
+                  type="submit"
+                  pending={loadingBtn}
+                  variant="contained"
+                  color="primary"
+                >
+                  確認送出
+                </LoadingButton>
               </div>
             </Form>
           </div>
         </div>
       </section>
+      <TermModal
+        open={isOpenTerm}
+        onClose={() => setIsOpenTerm(false)}
+        onAgree={onAgreeTerm}
+        onDisagree={() => setIsOpenTerm(false)}
+      />
     </>
   )
 }
-export default Signup
+export default withRouter(Signup)

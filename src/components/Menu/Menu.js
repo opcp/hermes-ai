@@ -1,37 +1,22 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  withRouter,
-} from 'react-router-dom'
-import {
-  Button,
-  Dropdown,
-  Form,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Container,
-  Image,
-} from 'react-bootstrap'
-import { useContext } from 'react'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { Link, withRouter } from 'react-router-dom'
+import { Button, Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
+import { useContext, useEffect, useState } from 'react'
 import swal from 'sweetalert'
-import userLogo from '../img/icon/user-circle-solid.svg'
-import Logo from '../img/AI-logo.png'
-import ScrollToTop from '../ScrollToTop/ScrollToTop'
+import { AccountCircle } from '@material-ui/icons'
+import Logo from '../../assets/img/Hermes-AI-logo-landscape-bg-transparent.png'
 
 // firebase
 import credential from '../../module/controller/Credential/credential'
 import { LogContext } from '../../Main'
 
-
 function Menu(props) {
   const { loginStatus, setStatus } = useContext(LogContext)
-  const { history } = props
+  const { history, location } = props
+  const [pathname, setPathName] = useState(location.pathname)
+
+  useEffect(() => {
+    setPathName(location.pathname)
+  }, [location])
 
   async function signOut() {
     try {
@@ -57,7 +42,7 @@ function Menu(props) {
             <Navbar.Brand>
               <img
                 src={Logo}
-                width="200"
+                width="190"
                 alt="HermesAI Logo"
                 title="HermesAI Logo"
               />
@@ -66,7 +51,10 @@ function Menu(props) {
           <Navbar.Collapse className="justify-content-between">
             <Nav>
               <Nav.Item>
-                <Nav.Link onClick={() => history.push('/use-case')}>
+                <Nav.Link
+                  onClick={() => history.push('/use-case')}
+                  active={pathname === '/use-case'}
+                >
                   使用案例
                 </Nav.Link>
               </Nav.Item>
@@ -78,12 +66,7 @@ function Menu(props) {
                     <NavDropdown
                       title={
                         <>
-                          <Image
-                            src={userLogo}
-                            width="30"
-                            alt="User Logo"
-                            title="User Logo"
-                          ></Image>
+                          <AccountCircle />
                           <span className="ml-2">{`Hi, ${
                             loginStatus ? credential.user.user_name ?? '' : ''
                           }`}</span>
@@ -93,19 +76,35 @@ function Menu(props) {
                       <NavDropdown.Item onClick={() => history.push('/member')}>
                         會員資料
                       </NavDropdown.Item>
-                      <NavDropdown.Item
-                        onClick={() => history.push('/memberOrder')}
-                      >
-                        會員訂單
-                      </NavDropdown.Item>
-                      <NavDropdown.Item
-                        onClick={() => history.push('/buyPoints')}
-                      >
-                        點數購買
-                      </NavDropdown.Item>
-                      <NavDropdown.Item onClick={() => credential.toHermesAI()}>
-                        使用系統
-                      </NavDropdown.Item>
+
+                      {credential.group?.status === 1 &&
+                        credential.user?.is_group_admin && (
+                          <>
+                            <NavDropdown.Item
+                              onClick={() => history.push('/memberOrder')}
+                            >
+                              訂單紀錄
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              onClick={() => history.push('/buyPoints')}
+                            >
+                              點數購買
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              onClick={() => history.push('/manage-user')}
+                            >
+                              帳號管理
+                            </NavDropdown.Item>
+                          </>
+                        )}
+                      {credential.user?.status === 1 &&
+                        credential.group?.url && (
+                          <NavDropdown.Item
+                            onClick={() => credential.toHermesAI()}
+                          >
+                            使用系統
+                          </NavDropdown.Item>
+                        )}
                       <NavDropdown.Divider></NavDropdown.Divider>
                       <NavDropdown.Item onClick={() => signOut()}>
                         登出
@@ -119,8 +118,8 @@ function Menu(props) {
                     <Link to="/signup">
                       <Button
                         variant="outline-success"
-                        // href="/signup"
                         className="mr-2"
+                        active={pathname === '/signup'}
                       >
                         註冊
                       </Button>
@@ -128,7 +127,12 @@ function Menu(props) {
                   </Nav.Item>
                   <Nav.Item>
                     <Link to="/login">
-                      <Button variant="outline-primary">登入</Button>
+                      <Button
+                        variant="outline-primary"
+                        active={pathname === '/login'}
+                      >
+                        登入
+                      </Button>
                     </Link>
                   </Nav.Item>
                 </>

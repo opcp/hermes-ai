@@ -1,6 +1,14 @@
 import { v4 as uuidv4 } from 'uuid'
 import { getFormattedDateTime } from '../../util'
 
+export async function fetchAllOrder() {
+  const conn = firebase.database()
+  const ref = conn.ref('/order')
+  const snapshot = await ref.get()
+  const value = snapshot.val()
+  return value ? Object.values(value) : []
+}
+
 export async function fetchOrderByGroup(group_id) {
   if (!group_id) {
     throw new Error('沒給 group')
@@ -9,7 +17,7 @@ export async function fetchOrderByGroup(group_id) {
   const ref = conn.ref('/order')
   const snapshot = await ref.orderByChild('group_id').equalTo(group_id).get()
   const value = snapshot.val()
-  return Object.values(value)
+  return value ? Object.values(value) : []
 }
 
 export async function fetchOrderByStatus(status) {

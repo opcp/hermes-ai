@@ -8,6 +8,7 @@
 @import './sass/page/signup';
 @import './sass/page/buyPoints';
 @import './sass/page/memberOrder';
+@import './sass/page/member';
 @import './sass/card';
 @import './sass/contract';
 @import './sass/.webMap';
@@ -31,7 +32,7 @@ body::-webkit-scrollbar {
     width: $bodyContainerWidth;
   }
 }
-#main-content {
+.main-content {
   min-height: $minMainContentHeight;
 }
 #footer {
@@ -45,6 +46,12 @@ body::-webkit-scrollbar {
     width: 120px;
     height: 120px;
   }
+}
+.fw-bolder {
+  font-weight: bolder;
+}
+.fw-bold {
+  font-weight: bold;
 }
 // footer {
 //   text-align: center;

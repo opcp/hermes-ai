@@ -1,43 +1,20 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  withRouter,
-} from 'react-router-dom'
-import Header from '../Header/Header'
-import ExampleCarousel from '../Carousel/ExampleCarousel'
-import Footer from '../Footer/Footer'
-import Contract from '../Contract/Contract'
+import { Link, withRouter } from 'react-router-dom'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import {
-  Button,
-  Container,
-  Row,
-  Col,
-  Figure,
-  Card,
-  Image,
-} from 'react-bootstrap'
+import { Button, Container, Row, Col, Card, Image } from 'react-bootstrap'
 import { LogContext } from '../../Main'
+import bannerImg from '../../assets/img/index-banner.png'
 
 function Home() {
-  // const imageRef = useRef(null);
-  // const [scroll, setScroll] = useState();
   AOS.init({
     duration: 1200,
   })
   const { loginStatus } = LogContext
-  // let callback = (entries) => {
-  //   const [entry] = entries;
-  //   setIsVisible(entry.isIntersecting);
-  // };
 
   return (
     <Container fluid className="p-0">
-      <Row id="banner">
-        <Container className="d-flex align-items-center text-light">
+      <Row id="banner" className="bg-white">
+        <Container className="d-flex align-items-center text-dark">
           <Row className="justify-content-between">
             <Col className="d-flex flex-column justify-content-center">
               <Row as="h1" className="mb-2 flex-wrap">
@@ -59,7 +36,7 @@ function Home() {
                   </Link>
                 )}
                 <Link variant="primary" size="lg" to="/">
-                  <Button size="lg" variant="light">
+                  <Button size="lg" variant="primary">
                     展示影片
                   </Button>
                 </Link>
@@ -69,7 +46,7 @@ function Home() {
               <Image
                 width={600}
                 alt="hermes-ai-image-labeling"
-                src="https://f.hubspotusercontent20.net/hubfs/4505120/home/hero-image-automation.png"
+                src={bannerImg}
               />
             </Col>
           </Row>
@@ -143,9 +120,9 @@ function Home() {
           </Row>
         </Container>
       </Row>
-      <Row style={{ padding: '60px 0' }} >
+      <Row style={{ padding: '60px 0' }}>
         <Container>
-          <div className="d-flex justify-content-center flex-gap-4 " >
+          <div className="d-flex justify-content-center flex-gap-4 ">
             <div className="d-flex justify-content-center flex-column m-xl-4">
               <Image
                 data-aos="zoom-up"

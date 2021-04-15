@@ -1,14 +1,18 @@
-import credential from '../../controller/Credential/credential'
 import { ajax } from './ajax'
-import { SCAPI_KEY } from '../../constants'
+import { SCAPI_KEY_MAP } from '../../constants'
 
-export function singUp(user_id, password, user_name) {
-  const { group } = credential
-  const { url, group_id } = group
+export function signUp({
+  user_id,
+  password,
+  user_name,
+  group_id,
+  url,
+  create_by,
+}) {
   const data = {
-    key: SCAPI_KEY,
+    key: SCAPI_KEY_MAP[url],
     group_id,
-    create_by: 'entrance_sign_up',
+    create_by,
     user_id,
     user_name,
     password,

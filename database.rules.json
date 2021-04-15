@@ -1,27 +1,205 @@
 {
   "rules": {
-    "user": {
-      ".read": true,
-      ".write": true
-    },
-    "group": {
+    ".write": "auth!=null",
+    "agent": {
+      ".read": "auth != null && (root.child('admin/' + auth.uid).exists() || root.child('group/' + root.child('user/' + auth.uid + '/group_id).val() + '/is_agent).val() == 'true')",
+      ".write": "auth != null && root.child('admin/' + auth.uid).exists()",
       "$group_id": {
-        "group_id": {},
-        "company_name": {},
-        "company_address": {},
-        "company_tel": {},
-        "contact_person_name": {},
-        "contact_person_tel": {},
-        "contact_person_email": {},
-        "agent_id": {},
-        "ref_agent_id": {},
-        "create_time": {},
-        "modify_time": {},
+        "$log_id": {
+          ".write": "!data.exists() || !newData.exists()",
+          "create_time": {
+            ".validate": "newData.isString()"
+          },
+          "create_by": {
+            ".validate": "root.child('admin/' + auth.uid).exists()"
+          },
+          "type": {
+            ".validate": "newData.isNumber()"
+          },
+          "qty": {
+            ".validate": "newData.isNumber()"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      }
+    },
+    "user": {
+      ".indexOn": ["user_id", "group_id"],
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid",
+        "user_id": {
+          ".validate": "newData.isString()"
+        },
+        "email": {
+          ".validate": "newData.isString()"
+        },
+        "user_name": {
+          ".validate": "newData.isString()"
+        },
+        "password": {
+          ".validate": "newData.isString()"
+        },
+        "group_id": {
+          ".validate": "newData.isString()"
+        },
+        "is_group_admin": {
+          ".validate": "newData.isBoolean()"
+        },
+        "status": {
+          ".validate": "newData.isNumber()"
+        },
+        "create_time": {
+          ".validate": "newData.isString()"
+        },
+        "modify_time": {
+          ".validate": "newData.isString()"
+        },
         "$other": {
           ".validate": false
         }
       }
     },
-    "agent": {}
+    "group": {
+      ".indexOn": ["group_id", "status"],
+      "$group_id": {
+        "group_id": {
+          ".validate": "newData.isString()"
+        },
+        "company_name": {
+          ".validate": "newData.isString()"
+        },
+        "company_address": {
+          ".validate": "newData.isString()"
+        },
+        "company_tel": {
+          ".validate": "newData.isString()"
+        },
+        "contact_person_name": {
+          ".validate": "newData.isString()"
+        },
+        "contact_person_tel": {
+          ".validate": "newData.isString()"
+        },
+        "contact_person_email": {
+          ".validate": "newData.isString()"
+        },
+        "ref_agent_id": {
+          ".validate": "newData.isString()"
+        },
+        "create_time": {
+          ".validate": "newData.isString()"
+        },
+        "modify_time": {
+          ".validate": "newData.isString()"
+        },
+        "tax_id": {
+          ".validate": "newData.isString()"
+        },
+        "url": {
+          ".validate": "newData.isString()",
+          ".write": "auth != null && root.child('admin/' + auth.uid).exists()"
+        },
+        "status": {
+          ".validate": "newData.isNumber()"
+        },
+        "is_agent": {
+          ".validate": "newData.isBoolean()",
+          ".write": "auth != null && root.child('admin/' + auth.uid).exists()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "admin": {
+      ".indexOn": ".value"
+    },
+    "order": {
+      ".indexOn": ["group_id", "status"],
+      "$order_id": {
+        "order_id": {
+          ".validate": "newData == $order_id"
+        },
+        "package_id": {
+          ".validate": "root.child('package/' + newData).exists()"
+        },
+        "group_id": {
+          ".validate": "root.child('group/' + newData).exists()"
+        },
+        "amount": {
+          ".validate": "newData.isNumber()"
+        },
+        "status": {
+          ".validate": "newData.isNumber()"
+        },
+        "create_time": {
+          ".validate": "newData.isString()"
+        },
+        "modify_time": {
+          ".validate": "newData.isString()"
+        },
+        "create_by": {
+          ".validate": "root.child('user/' + newData).exists()"
+        },
+        "modify_by": {
+          ".validate": "root.child('user/' + newData).exists()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "order_log": {
+      ".indexOn": ["order_id", "chg_status", "create_time"],
+      "$key": {
+        "order_id": {
+          ".validate": "root.child('order/' + newData).exists()"
+        },
+        "chg_status": {
+          ".validate": "newData.isNumber()"
+        },
+        "create_time": {
+          ".validate": "newData.isString()"
+        },
+        "create_by": {
+          ".validate": "root.child('user/' + newData).exists()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "package": {
+      ".indexOn": ["status", "create_time"],
+      "$package_id": {
+        "package_id": {
+          ".validate": "newData.isString()"
+        },
+        "package_name": {
+          ".validate": "newData.isString()"
+        },
+        "points": {
+          ".validate": "newData.isNumber()"
+        },
+        "price": {
+          ".validate": "newData.isNumber()"
+        },
+        "remark": {
+          ".validate": "newData.isString()"
+        },
+        "status": {
+          ".validate": "newData.isNumber()"
+        },
+        "create_time": {
+          ".validate": "newData.isString()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    }
   }
 }

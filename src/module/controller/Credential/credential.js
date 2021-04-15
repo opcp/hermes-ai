@@ -6,8 +6,8 @@ import {
   createUserAndGroup,
   fetchUserAndGroup,
 } from '../../model/database/userAndGroup'
-import { singUp as singUpToHermesAI } from '../../model/HermesAI/signUp'
 import _ from 'lodash'
+import { getUserId } from '../../util'
 
 class Credential {
   constructor() {
@@ -24,9 +24,7 @@ class Credential {
         this.eventHandlers.authChange.always.map((fn) => fn(user))
       )
       await Promise.all(
-        this.eventHandlers.authChange.once.map((fn) => {
-          fn(user)
-        })
+        this.eventHandlers.authChange.once.map((fn) => fn(user))
       )
       this.eventHandlers.authChange.once.forEach((fn) =>
         this.off('authChange', fn)
@@ -69,6 +67,8 @@ class Credential {
     const user = firebase.auth().currentUser
     if (user && this.user?.uid !== user.uid) {
       this.user = user
+      const isAdmin = await checkIsAdmin(user.email)
+      admin.user_id = isAdmin ? user.email : null
       await this.updateGroup()
     } else if (!user) {
       this.user = null
@@ -81,9 +81,19 @@ class Credential {
       .signInWithEmailAndPassword(email, password)
     const { user } = userCredential
 
-    const { user_name, group } = await fetchUserAndGroup(user.uid)
+    const {
+      user_name,
+      group,
+      is_group_admin = false,
+      status,
+    } = await fetchUserAndGroup(user.uid)
 
-    this.user = Object.assign(user, { user_name, pw: btoa(password) })
+    this.user = Object.assign(user, {
+      user_name,
+      pw: btoa(password),
+      is_group_admin,
+      status,
+    })
     this.group = group
     return this
   }
@@ -118,19 +128,21 @@ class Credential {
     this.user = user
     this.user.user_name = user_name
     this.user.pw = encodedPassword
+    this.user.status = 0
+    this.user.is_group_admin = isAdmin
 
     if (isAdmin) {
       const { group } = await createUserAndGroup(group_id, user.uid, {
         password: encodedPassword,
+        email,
         ...option,
       })
       this.group = group
     } else {
-      await createUser(group_id, user.uid, user_name, encodedPassword)
+      await createUser(group_id, user.uid, user_name, encodedPassword, email)
       const { group } = await fetchUserAndGroup(user.uid)
       this.group = group
     }
-    await singUpToHermesAI(email, password, user_name)
     return this
   }
   toHermesAI() {
@@ -138,20 +150,27 @@ class Credential {
       throw new Error('沒有登入')
     }
     const { url, group_id } = this.group
-    const { email: user_id, pw } = this.user
+    const { email, pw } = this.user
+    const user_id = getUserId(email, group_id)
     const time = new Date().getTime()
-    const fullUrl = `${url}/login.html?id=${btoa(
-      group_id + '_' + user_id
-    )}&pw=${pw}&time=${btoa(time)}`
+    const fullUrl = `${url}/login.html?id=${btoa(user_id)}&pw=${pw}&time=${btoa(
+      time
+    )}`
     window.open(fullUrl)
   }
   async updateGroup() {
-    const { group, user_name, password } = await fetchUserAndGroup(
-      this.user.uid
-    )
+    const {
+      group,
+      user_name,
+      password,
+      status,
+      is_group_admin,
+    } = await fetchUserAndGroup(this.user.uid)
     this.group = group
     this.user.user_name = user_name
     this.user.pw = password
+    this.user.status = status
+    this.user.is_group_admin = is_group_admin
   }
 }
 const credential = new Credential()

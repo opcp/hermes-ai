@@ -11,13 +11,12 @@ function Card(prop) {
     setIsVisible(entry.isIntersecting)
   }
 
-  const option = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1,
-  }
-
   useEffect(() => {
+    const option = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1,
+    }
     const observer = new IntersectionObserver(callback, option)
     if (containerRef.current && !containerRef.current.dataset.isLoad) {
       observer.observe(containerRef.current)
@@ -29,7 +28,7 @@ function Card(prop) {
         observer.unobserve(containerRef.current)
       }
     }
-  }, [containerRef, option])
+  }, [containerRef])
 
   // function callback(entries) {
   //   entries.forEach((element) => {

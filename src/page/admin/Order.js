@@ -1,18 +1,20 @@
 import React from 'react'
-import Table from '../components/Table'
-import { useEffect } from 'react'
 import { useState } from 'react'
-import { ORDER_STATUS_MAP } from '../module/constants'
-import { fetchOrderByGroup, updateOrder } from '../module/model/database/order'
-import credential from '../module/controller/Credential/credential'
-import { fetchPackage } from '../module/model/database/package'
+import { fetchAllOrder } from '../../module/model/database/order'
+import admin from '../../module/controller/Admin/Admin'
+import { useEffect } from 'react'
+import { fetchPackage } from '../../module/model/database/package'
 import _ from 'lodash'
+import { ORDER_STATUS_MAP } from '../../module/constants'
+import Table from '../../components/Table'
 import { Refresh } from '@material-ui/icons'
 import { Container } from 'react-bootstrap'
 
-function MemberOrder(props) {
+function Order(props) {
   const columns = [
-    { title: '編號', field: 'order_id', editable: 'never' },
+    // { title: '訂單編號', field: 'order_id', editable: false },
+    { title: '企業編號', field: 'group_id', editable: 'never' },
+    { title: '方案', field: 'package_name', editable: 'never' },
     {
       title: '單價',
       field: 'price',
@@ -37,12 +39,7 @@ function MemberOrder(props) {
     {
       title: '狀態',
       field: 'status',
-      lookup: {
-        9: '取消',
-      },
-      render(rowData) {
-        return ORDER_STATUS_MAP[rowData.status]
-      },
+      lookup: ORDER_STATUS_MAP,
       cellStyle: (val, rowData) => ({
         color: rowData.status === 0 ? 'red' : 'green',
       }),
@@ -68,12 +65,13 @@ function MemberOrder(props) {
       editable: 'never',
     },
   ]
+
   const [tableData, setTableData] = useState([])
   const [refreshTable, setRefreshTable] = useState(false)
 
   useEffect(() => {
     async function updateData() {
-      const order = await fetchOrderByGroup(credential.group?.group_id)
+      const order = await fetchAllOrder()
       const packageDataList = await fetchPackage()
       const packageMap = _.chain(packageDataList)
         .compact()
@@ -97,24 +95,28 @@ function MemberOrder(props) {
   }, [refreshTable])
 
   return (
-    <Container bg="light" className="pt-5 pb-5">
+    <Container>
       <Table
         columns={columns}
         data={tableData}
-        title="訂單紀錄"
         isLoading={refreshTable}
         editable={{
           isEditable: (rowData) => rowData.status === 0,
           isDeletable: () => false,
           onRowUpdate: (newData, oldData) =>
-            updateOrder(newData.order_id, {
-              status: newData.status,
-            }).then(() => {
-              const index = oldData.tableData.id
-              const newTableData = [...tableData]
-              newTableData[index] = { ...newData }
-              setTableData(newTableData)
-            }),
+            admin
+              .enableOrder(
+                newData.order_id,
+                newData.create_time,
+                '',
+                newData.group_id
+              )
+              .then(() => {
+                const index = oldData.tableData.id
+                const newTableData = [...tableData]
+                newTableData[index] = { ...newData }
+                setTableData(newTableData)
+              }),
         }}
         actions={[
           {
@@ -129,9 +131,10 @@ function MemberOrder(props) {
         options={{
           actionsColumnIndex: -1,
         }}
+        title="訂單管理"
       />
     </Container>
   )
 }
 
-export default MemberOrder
+export default Order

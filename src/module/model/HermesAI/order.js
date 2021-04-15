@@ -1,14 +1,13 @@
-import dayjs from 'dayjs'
-import { SCAPI_KEY } from '../../constants'
+import { SCAPI_KEY_MAP } from '../../constants'
 import credential from '../../controller/Credential/credential'
-import { getFormattedDateTime } from '../../util'
+import databaseCrud from '../database/crud'
 import { ajax } from './ajax'
 
 export async function fetchPurchaseRecord(group_id, domain) {
   if (!group_id || !domain) {
     return []
   }
-  const url = `${domain}/scapi/v1/ai/get-purchase-record?group_id=${group_id}&key=${SCAPI_KEY}`
+  const url = `${domain}/scapi/v1/ai/get-purchase-record?group_id=${group_id}&key=${SCAPI_KEY_MAP[domain]}`
   const response = await ajax(url)
   return response
 }
@@ -16,7 +15,7 @@ export async function fetchUseRecord(group_id, domain) {
   if (!group_id || !domain) {
     return []
   }
-  const url = `${domain}/scapi/v1/ai/get-point-record?group_id=${group_id}&key=${SCAPI_KEY}`
+  const url = `${domain}/scapi/v1/ai/get-point-record?group_id=${group_id}&key=${SCAPI_KEY_MAP[domain]}`
   const response = await ajax(url)
   return response
 }
@@ -33,7 +32,7 @@ export async function createOrder(group_id, domain, pur_point, pur_time) {
   const { email: user_id } = user
   const pur_by = `${group_id}_${user_id}`
   const requestParam = {
-    key: SCAPI_KEY,
+    key: SCAPI_KEY_MAP[domain],
     group_id,
     pur_point,
     pur_time,
@@ -49,15 +48,14 @@ export async function createOrder(group_id, domain, pur_point, pur_time) {
   })
   return response
 }
-export async function updateOrder(group_id, domain, pur_time, option = {}) {
+export async function updateOrder(group_id, pur_time, option = {}) {
   if (!group_id) {
     throw new Error('沒有給 group')
-  } else if (!domain) {
-    throw new Error('沒有給 domain')
   }
+  const domain = await databaseCrud.read(`/group/${group_id}/url`)
   const url = `${domain}/scapi/v1/ai/purchase-record`
   const requestParam = {
-    key: SCAPI_KEY,
+    key: SCAPI_KEY_MAP[domain],
     group_id,
     pur_time,
     is_remit: 'Y',

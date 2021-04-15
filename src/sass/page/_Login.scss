@@ -1,5 +1,6 @@
 .loginContainer {
   @extend .mainContainer;
+  @extend .main-content;
   background-color: #4090e0;
   height: auto;
   .loginMiddle {
@@ -27,10 +28,11 @@
         @include flex_func(center);
       }
       .loginBtn {
-        @media (max-width: 1300px) {
-          justify-content: center;
-        }
-        @include flex_func(flex-end);
+        // @media (max-width: 1300px) {
+        @include flex_func();
+        // justify-content: center;
+        // }
+        // @include flex_func(flex-end);
       }
     }
   }

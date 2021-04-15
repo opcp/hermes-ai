@@ -1,35 +1,36 @@
-import { useState, useEffect } from 'react'
-import { Table, InputGroup, Form, Col, Button } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import { Form, Col, Button } from 'react-bootstrap'
 import order from '../../module/controller/Order/order'
 import { fetchPackage } from '../../module/model/database/package'
 import swal from 'sweetalert'
 import { useHistory } from 'react-router'
 
 function BuyPoints() {
-  const [pointTerm, getPointTerm] = useState([{
-    "create_time": "2021/04/06 11:19:20",
-    "package_id": 1,
-    "package_name": "預設",
-    "points": 300,
-    "price": 100000,
-    "remark": "測試",
-    "status": 1
-  }, {
-    "create_time": "2021/04/07 11:19:20",
-    "package_id": 2,
-    "package_name": "預設",
-    "points": 600,
-    "price": 200000,
-    "remark": "測試",
-    "status": 1
-  }])
+  const [pointTerm, getPointTerm] = useState([
+    //   {
+    //   "create_time": "2021/04/06 11:19:20",
+    //   "package_id": 1,
+    //   "package_name": "預設",
+    //   "points": 300,
+    //   "price": 100000,
+    //   "remark": "測試",
+    //   "status": 1
+    // }, {
+    //   "create_time": "2021/04/07 11:19:20",
+    //   "package_id": 2,
+    //   "package_name": "預設",
+    //   "points": 600,
+    //   "price": 200000,
+    //   "remark": "測試",
+    //   "status": 1
+    // }
+  ])
   const [chooseTerm, nowTerm] = useState(null)
   const history = useHistory()
 
-
-  // useEffect(() => {
-  //   fetchPackage().then((data) => getPointTerm(Object.values(data)))
-  // }, [])
+  useEffect(() => {
+    fetchPackage().then((data) => getPointTerm(Object.values(data)))
+  }, [])
 
   const buyPointsAPI = () => {
     if (chooseTerm) {
@@ -91,10 +92,10 @@ function BuyPoints() {
                                 onClick={(e) => nowTerm(e.target.value)}
                                 value={index}
                               />
-                              <Form.Check.Label >
+                              <Form.Check.Label>
                                 {i.price.toLocaleString('en-US')}
                               </Form.Check.Label>
-                              <Form.Check.Label >
+                              <Form.Check.Label>
                                 {i.points.toLocaleString('en-US')}點
                               </Form.Check.Label>
                             </Form.Check>
